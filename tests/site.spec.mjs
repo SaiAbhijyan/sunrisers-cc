@@ -450,14 +450,13 @@ test.describe("parallax", () => {
 });
 
 test.describe("brand assets", () => {
-  test("phoenix in the header, wordmark with alt, texture hero, lazy below the fold", async ({ page }) => {
+  test("phoenix in the header, wordmark as flat SVG text, texture hero, lazy below the fold", async ({ page }) => {
     await page.goto("index.html", { waitUntil: "networkidle" });
     const logo = page.locator(".brand__logo");
     await expect(logo).toBeVisible();
     expect(await logo.evaluate((i) => i.naturalWidth)).toBeGreaterThan(0);
-    const mark = page.locator("#hero-title img");
-    await expect(mark).toHaveAttribute("alt", /Sunrisers Cricket Club/);
-    expect(await mark.evaluate((i) => i.naturalWidth)).toBeGreaterThan(0);
+    await expect(page.locator("#hero-title")).toHaveText(/Sunrisers Cricket Club, established 2017, New Jersey, USA/);
+    await expect(page.locator("#hero-title svg")).toHaveAttribute("aria-hidden", "true");
     const hero = page.locator(".hero__tex img");
     await expect(hero).toHaveAttribute("fetchpriority", "high");
     expect(await hero.evaluate((i) => i.naturalWidth)).toBeGreaterThan(0);
@@ -491,6 +490,39 @@ test.describe("brand assets", () => {
     });
     expect(ratio.sunOnInk).toBeGreaterThanOrEqual(4.5);
     expect(ratio.deepOnPaper).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+test.describe("hero wordmark is flat, crisp SVG text", () => {
+  test("no glow, blur, shadow or filter; flat cream fill; real text in the Barlow Condensed face", async ({ page }) => {
+    await page.goto("index.html", { waitUntil: "networkidle" });
+    await page.waitForTimeout(1800);
+    const r = await page.evaluate(async () => {
+      await document.fonts.ready;
+      const mark = document.querySelector("#hero-title");
+      const nodes = [mark, mark.querySelector("svg"), ...mark.querySelectorAll("svg *")];
+      const bad = nodes.filter((e) => { const c = getComputedStyle(e); return c.filter !== "none" || c.textShadow !== "none" || c.boxShadow !== "none" || c.opacity !== "1"; }).map((e) => e.tagName);
+      const t = mark.querySelector("text");
+      return { bad, fill: getComputedStyle(t).fill, family: getComputedStyle(t).fontFamily, loaded: document.fonts.check('800 40px "Barlow Condensed"'), imgs: mark.querySelectorAll("img").length, words: [...mark.querySelectorAll("text")].map((x) => x.textContent.trim()), box: mark.querySelector("svg").getBoundingClientRect().width };
+    });
+    expect(r.bad).toEqual([]);
+    expect(r.fill).toMatch(/^(oklch\(0\.9\d|rgb\(2[3-5]\d)/); // the --on-ink cream, opaque
+    expect(r.family).toContain("Barlow Condensed");
+    expect(r.loaded).toBe(true);
+    expect(r.imgs).toBe(0);
+    expect(r.words).toEqual(["EST. 2017", "SUNRISERS", "CRICKET", "CLUB", "NEW JERSEY USA"]);
+    expect(r.box).toBeGreaterThan(280);
+  });
+
+  test("the load entrance only fades and slides (no blur), and is off under reduced motion", async ({ page, browser }) => {
+    const css = await (await page.request.get("css/site.css")).text();
+    const kf = css.match(/@keyframes sr-mark-in\s*\{[^}]*\}[^}]*\}/)[0];
+    expect(kf).not.toMatch(/blur|filter|shadow/);
+    const ctx = await browser.newContext({ reducedMotion: "reduce" });
+    const p2 = await ctx.newPage();
+    await p2.goto(ROOT + "index.html");
+    expect(await p2.$eval("#hero-title", (e) => getComputedStyle(e).animationName)).toBe("none");
+    await ctx.close();
   });
 });
 

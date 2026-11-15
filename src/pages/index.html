@@ -15,13 +15,18 @@ class: home
   <div class="hero__shade" aria-hidden="true"></div>
   <div class="wrap hero__center">
     <h1 id="hero-title" class="hero__mark">
-      <picture>
-        <source media="(max-width: 480px)" type="image/avif" srcset="assets/img/brand/wordmark-480.avif">
-        <source media="(max-width: 480px)" type="image/webp" srcset="assets/img/brand/wordmark-480.webp">
-        <source type="image/avif" srcset="assets/img/brand/wordmark-800.avif">
-        <source type="image/webp" srcset="assets/img/brand/wordmark-800.webp">
-        <img src="assets/img/brand/wordmark-800.png" alt="Sunrisers Cricket Club, established 2017, New Jersey, USA" width="800" height="516" decoding="async">
-      </picture>
+      <span class="visually-hidden">Sunrisers Cricket Club, established 2017, New Jersey, USA</span>
+      <svg viewBox="0 0 800 516" width="800" height="516" aria-hidden="true" focusable="false">
+        <defs>
+          <path id="wm-top" d="M0 236Q400 188 800 236"/>
+          <path id="wm-arc" d="M178 366A225 150 0 0 0 622 366"/>
+        </defs>
+        <text x="400" y="40" text-anchor="middle" font-size="50" textLength="252" lengthAdjust="spacing">EST. 2017</text>
+        <text font-size="198"><textPath href="#wm-top" startOffset="4" textLength="792" lengthAdjust="spacing">SUNRISERS</textPath></text>
+        <text x="400" y="362" text-anchor="middle" font-size="54" textLength="250" lengthAdjust="spacing">CRICKET</text>
+        <text x="400" y="402" text-anchor="middle" font-size="34" textLength="102" lengthAdjust="spacing">CLUB</text>
+        <text font-size="52" letter-spacing="9"><textPath href="#wm-arc" startOffset="50%" text-anchor="middle">NEW JERSEY USA</textPath></text>
+      </svg>
     </h1>
     <p class="lede">Three leagues, one 2026 season. Every match and every player, from CricClubs.</p>
     <div class="hero__actions">

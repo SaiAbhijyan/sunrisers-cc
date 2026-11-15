@@ -47,7 +47,7 @@ New tests: parallax and reduced motion; player cards (counts 29, 25, 20; every v
 |---|---|
 | html-validate dist | 0 errors |
 | Playwright (Chrome, desktop 1440 and mobile 390), root build | 219 passed, 5 skipped (touch-only skips: hover and arrow-key tests on mobile; mobile-menu test on desktop), 0 failed |
-| Playwright under the `/sunrisers-nj-site/` mount (subpath build) | 219 passed, 5 skipped, 0 failed |
+| Playwright under a GitHub Pages style subpath mount (subpath build) | 219 passed, 5 skipped, 0 failed |
 | Axe | 0 violations on every page, both viewports (new `--sun` / `--sun-deep` tokens included) |
 | npm audit --audit-level=low | 0 vulnerabilities |
 | Impeccable detect (index, fixtures, teams, about, contact at 1440x900 and 390x844) | 0 findings |

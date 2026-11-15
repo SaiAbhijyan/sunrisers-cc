@@ -10,7 +10,7 @@ const club = JSON.parse(readFileSync(join(src, "data/club.json"), "utf8"));
 const playerData = JSON.parse(readFileSync(join(src, "data/players.json"), "utf8")).teams;
 club.squads.forEach((q) => { q.leagueId = new URL(q.teamUrl).searchParams.get("league"); q.players = playerData[q.teamId]; if (!q.players) throw new Error(`no player data for team ${q.teamId}`); });
 // SITE_URL and BASE_PATH come from the environment so the same source builds for a domain or a project subpath
-// (GitHub Pages: BASE_PATH=/sunrisers-nj-site). Root-absolute links are prefixed with BASE_PATH.
+// (GitHub Pages: BASE_PATH=/sunrisers-cc). Root-absolute links are prefixed with BASE_PATH.
 const BASE_PATH = (process.env.BASE_PATH || "").replace(/\/$/, "");
 const SITE_URL = (process.env.SITE_URL || "https://example.invalid").replace(/\/$/, ""); // PLACEHOLDER until the real domain is chosen
 
@@ -327,7 +327,7 @@ const IMG = "assets/img/brand";
 const HOME_PRELOAD = [
   `<link rel="preload" as="image" type="image/avif" media="(min-width: 701px)" href="${IMG}/tex-wide-1280.avif" imagesrcset="${IMG}/tex-wide-1280.avif 1280w, ${IMG}/tex-wide.avif 1920w" imagesizes="100vw" fetchpriority="high">`,
   `<link rel="preload" as="image" type="image/avif" media="(max-width: 700px)" href="${IMG}/tex-tall.avif" fetchpriority="high">`,
-  `<link rel="preload" as="image" type="image/avif" href="${IMG}/wordmark-800.avif" imagesrcset="${IMG}/wordmark-480.avif 480w, ${IMG}/wordmark-800.avif 800w" imagesizes="(max-width: 700px) 88vw, 720px">`,
+  `<link rel="preload" href="assets/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>`,
 ].join("\n");
 
 function render(file) {

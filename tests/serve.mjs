@@ -14,7 +14,7 @@ for (const line of readFileSync(join(dist, "_headers"), "utf8").split("\n")) {
   if (!line.startsWith(" ")) { cur = line.trim(); continue; }
   if (cur === "/*") { const i = line.indexOf(":"); globalHeaders[line.slice(0, i).trim()] = line.slice(i + 1).trim(); }
 }
-const mount = (process.env.MOUNT || "").replace(/\/$/, ""); // e.g. /sunrisers-nj-site, to mimic a GitHub Pages project site
+const mount = (process.env.MOUNT || "").replace(/\/$/, ""); // e.g. /sunrisers-cc, to mimic a GitHub Pages project site
 const port = Number(process.env.PORT || 4173);
 createServer((req, res) => {
   let path = decodeURIComponent(new URL(req.url, "http://x").pathname);

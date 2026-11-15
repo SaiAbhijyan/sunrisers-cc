@@ -3,7 +3,7 @@
 # Usage: tools/deploy-pages.sh   (needs gh authenticated for the repo owner)
 set -euo pipefail
 cd "$(dirname "$0")/.."
-OWNER=SaiAbhijyan; REPO=sunrisers-nj-site
+OWNER=SaiAbhijyan; REPO=sunrisers-cc
 export BASE_PATH=/$REPO SITE_URL=https://${OWNER,,}.github.io/$REPO
 node build.mjs
 T=$(mktemp -d)

@@ -1,5 +1,6 @@
 /* fonts: self-hosted, swap-safe */
 @font-face { font-family: "Big Shoulders Display"; font-weight: 900; font-style: normal; font-display: swap; src: url("../assets/fonts/big-shoulders-display-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 800; font-style: normal; font-display: swap; src: url("../assets/fonts/barlow-condensed-latin-800-normal.woff2") format("woff2"); }
 @font-face { font-family: "Hanken Grotesk"; font-weight: 400; font-style: normal; font-display: swap; src: url("../assets/fonts/hanken-grotesk-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Hanken Grotesk"; font-weight: 700; font-style: normal; font-display: swap; src: url("../assets/fonts/hanken-grotesk-latin-700-normal.woff2") format("woff2"); }
 
@@ -101,14 +102,15 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .band__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.5rem var(--colgap); margin-bottom: clamp(2rem, 4vw, 3.5rem); }
 .band__head p { margin: 0; }
 
-/* ---------- home hero: supplied wordmark, centred, over the red-orange foil texture ---------- */
+/* ---------- home hero: wordmark (SVG text, lettering after the supplied wordmark), centred, over the red-orange foil texture ---------- */
 .hero { position: relative; min-height: min(100svh - 4.5rem, 56rem); display: grid; place-items: center; overflow: clip; isolation: isolate; background: var(--ink); color: var(--on-ink); }
 .hero__tex { position: absolute; inset: 0; z-index: -3; }
 .hero__tex img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
 .hero__shade { position: absolute; inset: 0; z-index: -2; background: radial-gradient(56% 50% at 50% 47%, var(--veil-60), transparent 74%), linear-gradient(to bottom, var(--veil-50), transparent 24%, transparent 64%, var(--ink) 100%); }
 .hero__center { display: grid; justify-items: center; text-align: center; padding-block: clamp(2rem, 4vw, 3rem) clamp(4rem, 9vw, 7rem); }
 .hero__mark { margin: 0; width: min(44rem, 88vw); }
-.hero__mark img { width: 100%; height: auto; filter: drop-shadow(0 0 0.3rem var(--glow-white)) drop-shadow(0 0 1.8rem var(--glow-sun)); }
+/* the wordmark is live SVG text: crisp at any size, flat cream, no glow, blur or shadow */
+.hero__mark svg { display: block; width: 100%; height: auto; fill: var(--on-ink); font-family: var(--font-mark); font-weight: 800; filter: none; text-shadow: none; }
 .hero .lede { margin: clamp(1rem, 2vw, 1.5rem) auto; color: var(--on-ink); max-width: 38ch; text-shadow: 0 1px 14px var(--veil-74); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; justify-content: center; align-items: center; }
 .js .hero .lede, .js .hero__actions { animation: up 900ms var(--ease) both; }

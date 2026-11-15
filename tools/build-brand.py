@@ -84,8 +84,7 @@ print("phoenix aspect", ph.width / ph.height)
 # ---- 4. wordmark ----
 wm = Image.open(S / "wordmark.png").convert("RGBA"); wm = wm.crop(wm.getbbox())
 print("wordmark", wm.size, "aspect", wm.width / wm.height)
-save3(wm, "wordmark-800", png=True)
-save3(fit(wm, 480), "wordmark-480", png=True)
+# the hero wordmark is live SVG text now (src/pages/index.html); the supplied wordmark.png has a baked-in soft halo, so it is not shipped
 
 # ---- 5. icons on a dark ground (maskable-safe padding) ----
 def icon(size, pad=0.14, bg=(18, 8, 4)):

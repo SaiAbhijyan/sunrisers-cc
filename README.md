@@ -15,5 +15,5 @@ Brand art: `brand-src/` (originals) to `src/assets/img/brand/` via `python3 tool
 Pages: home, about, squads, results, news, events, gallery, sponsors, ground, contact, join, 404.
 
 ## Publishing (GitHub Pages)
-Live: https://saiabhijyan.github.io/sunrisers-nj-site/ (branch `gh-pages`, built by `tools/deploy-pages.sh`, which sets `BASE_PATH=/sunrisers-nj-site` and `SITE_URL`). Pages cannot send headers, so the strict CSP is the meta tag in every page; `dist/_headers` is only used on hosts that support it.
-Run the suite under the subpath: `BASE_PATH=/sunrisers-nj-site npx playwright test` (serves with `MOUNT`). Against the live site: `SITE_ORIGIN=https://saiabhijyan.github.io BASE_PATH=/sunrisers-nj-site npx playwright test`.
+Live: https://saiabhijyan.github.io/sunrisers-cc/ (branch `gh-pages`, built by `tools/deploy-pages.sh`, which sets `BASE_PATH=/sunrisers-cc` and `SITE_URL`). Pages cannot send headers, so the strict CSP is the meta tag in every page; `dist/_headers` is only used on hosts that support it.
+Run the suite under the subpath: `BASE_PATH=/sunrisers-cc npx playwright test` (serves with `MOUNT`). Against the live site: `SITE_ORIGIN=https://saiabhijyan.github.io BASE_PATH=/sunrisers-cc npx playwright test`.
