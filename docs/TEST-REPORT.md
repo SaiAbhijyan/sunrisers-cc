@@ -64,3 +64,6 @@ Honest notes: the opaque textures use a jpg fallback (not png) because they have
 
 ## Run of 15 Nov 2026 (after midnight): traced vector wordmark
 The hero wordmark is now the supplied Milkstore 02 lettering traced to one crisp SVG path (no glow, blur or filter), inlined with `fill: currentColor` in the cream token; the OG image uses the same vector. The earlier Barlow Condensed SVG text and its font file were removed. Traced shapes overlap the supplied PNG at 98.3 percent (pixel XOR 1.7 percent of the lettering area at a 50 percent alpha cut); tests: one flat path, no text, image or filter, same viewBox, no computed filter or shadow, load entrance without blur, reduced motion still, and an overlap test (IoU above 0.95) against `brand-src/wordmark.png`. See the final run below for totals.
+
+### Final run, 15 Nov 2026: wordmark traced from the two hand-cleaned images
+Source: `wordmark-sunrisers-est-clean.png` + `wordmark-cricket-club-nj-clean.png` (composed per `home-reference.png`), 8x upscale, traced to one flat path (viewBox 800x422). Overlay IoU against the sources 0.986. Playwright (desktop 1440 + mobile 390): 225 passed, 5 skipped (touch-only), 0 failed. `npm audit`: 0. html-validate clean.

@@ -358,7 +358,11 @@ function render(file) {
     .replace("{{squadlinks}}", renderSquadLinks())
     .replace("{{squadsections}}", renderSquadSections())
     .replace("{{squadfilter}}", renderSquadFilter())
-    .replace("{{wordmark}}", () => readFileSync(join(src, "assets/img/brand/wordmark.svg"), "utf8").trim().replace("<svg ", '<svg width="800" height="516" aria-hidden="true" focusable="false" '))
+    .replace("{{wordmark}}", () => {
+      const svg = readFileSync(join(src, "assets/img/brand/wordmark.svg"), "utf8").trim();
+      const [w, h] = svg.match(/viewBox="0 0 (\d+) (\d+)"/).slice(1);
+      return svg.replace("<svg ", `<svg width="${w}" height="${h}" aria-hidden="true" focusable="false" `);
+    })
     .replace("{{form}}", partial("form"));
   const left = html.match(/\{\{[^}]+\}\}/g);
   if (left) throw new Error(`${file}: unresolved tokens ${left.join(", ")}`);

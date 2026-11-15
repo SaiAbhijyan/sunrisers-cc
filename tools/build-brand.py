@@ -82,9 +82,7 @@ for W in (96, 192, 384):
 print("phoenix aspect", ph.width / ph.height)
 
 # ---- 4. wordmark ----
-wm = Image.open(S / "wordmark.png").convert("RGBA"); wm = wm.crop(wm.getbbox())
-print("wordmark", wm.size, "aspect", wm.width / wm.height)
-# the hero wordmark is the traced vector src/assets/img/brand/wordmark.svg (tools/trace-wordmark.py); the supplied wordmark.png has a baked-in soft halo, so it is not shipped
+# the hero wordmark is the traced vector src/assets/img/brand/wordmark.svg (tools/trace-wordmark.py); the supplied wordmark PNGs have a baked-in soft halo, so it is not shipped
 
 # ---- 5. icons on a dark ground (maskable-safe padding) ----
 def icon(size, pad=0.14, bg=(18, 8, 4)):

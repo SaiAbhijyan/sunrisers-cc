@@ -508,28 +508,31 @@ test.describe("hero wordmark is a flat, crisp traced vector", () => {
     expect(r.fill).toMatch(/^(oklch\(0\.9\d|rgb\(2[3-5]\d)/); // the --on-ink cream, opaque
     expect(r.paths).toBe(1);
     expect(r.texts + r.imgs + r.filters).toBe(0);
-    expect(r.view).toBe("0 0 800 516");
+    expect(r.view).toBe("0 0 800 422");
     expect(r.hidden).toBe("true");
     expect(r.box).toBeGreaterThan(280);
   });
 
-  test("the traced wordmark covers the supplied lettering (pixel overlap with brand-src/wordmark.png)", async ({ page }) => {
+  test("the traced wordmark covers the supplied lettering (pixel overlap with brand-src/wordmark-sunrisers-est-clean.png + wordmark-cricket-club-nj-clean.png)", async ({ page }) => {
     await page.goto("index.html", { waitUntil: "networkidle" });
     await page.waitForTimeout(1800);
-    const png = readFileSync(join(import.meta.dirname, "..", "brand-src", "wordmark.png")).toString("base64");
-    const iou = await page.evaluate(async (b64) => {
-      const img = new Image(); img.src = "data:image/png;base64," + b64; await img.decode();
-      const W = 800, H = 516;
-      const c1 = new OffscreenCanvas(W, H).getContext("2d"); c1.drawImage(img, 0, 0, W, H);
+    const src = (f) => readFileSync(join(import.meta.dirname, "..", "brand-src", f)).toString("base64");
+    const iou = await page.evaluate(async ([topB64, botB64]) => {
+      const load = async (b) => { const i = new Image(); i.src = "data:image/png;base64," + b; await i.decode(); return i; };
+      const top = await load(topB64), bot = await load(botB64);
+      // same composite the trace was made from (keep in sync with tools/wordmark_src.py)
+      const W = 800, H = 422, K = 0.59, BX = 165, BY = 236;
+      const ctx = (draw) => { const c = new OffscreenCanvas(W, H).getContext("2d", { willReadFrequently: true }); draw(c); return c.getImageData(0, 0, W, H).data; };
+      const a1 = ctx((c) => c.drawImage(top, 0, 0));
+      const a2 = ctx((c) => c.drawImage(bot, BX, BY, bot.width * K, bot.height * K));
       const svg = document.querySelector("#hero-title svg").outerHTML.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" color="#fff" ');
       const im2 = new Image(); im2.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg); await im2.decode();
-      const c2 = new OffscreenCanvas(W, H).getContext("2d"); c2.drawImage(im2, 0, 0, W, H);
-      const a = c1.getImageData(0, 0, W, H).data, b = c2.getImageData(0, 0, W, H).data;
+      const b = ctx((c) => c.drawImage(im2, 0, 0, W, H));
       let inter = 0, uni = 0;
-      for (let i = 3; i < a.length; i += 4) { const x = a[i] > 128, y = b[i] > 128; if (x && y) inter++; if (x || y) uni++; }
+      for (let i = 3; i < b.length; i += 4) { const x = Math.max(a1[i], a2[i]) > 128, y = b[i] > 128; if (x && y) inter++; if (x || y) uni++; }
       return inter / uni;
-    }, png);
-    expect(iou).toBeGreaterThan(0.95);
+    }, [src("wordmark-sunrisers-est-clean.png"), src("wordmark-cricket-club-nj-clean.png")]);
+    expect(iou).toBeGreaterThan(0.97);
   });
 
   test("the load entrance only fades and slides (no blur), and is off under reduced motion", async ({ page, browser }) => {
