@@ -13,3 +13,7 @@ tests/lighthouse-all.sh
 Layout: `src/pages` (content), `src/partials` (layout, header, footer, form), `src/css/tokens.css` (the only place for colours and fonts), `src/css/site.css`, `src/js`, `src/data/club.json` (squads, CricClubs links, results), `src/data/players.json` (generated from `research/player-stats/` by `tools/import-player-stats.py`), `src/css/motion.css` and `src/js/motion.js` (scroll animation, see `docs/MOTION.md`), `build.mjs`.
 See `docs/BRAND-SLOTS.md` (where Kittl assets go), `docs/CONTENT-SOURCES.md`, `docs/SECURITY.md`, `docs/TEST-REPORT.md`, `HALLMARK_PICKS.md`.
 Pages: home, about, squads, results, news, events, gallery, sponsors, ground, contact, join, 404.
+
+## Publishing (GitHub Pages)
+Live: https://saiabhijyan.github.io/sunrisers-nj-site/ (branch `gh-pages`, built by `tools/deploy-pages.sh`, which sets `BASE_PATH=/sunrisers-nj-site` and `SITE_URL`). Pages cannot send headers, so the strict CSP is the meta tag in every page; `dist/_headers` is only used on hosts that support it.
+Run the suite under the subpath: `BASE_PATH=/sunrisers-nj-site npx playwright test` (serves with `MOUNT`). Against the live site: `SITE_ORIGIN=https://saiabhijyan.github.io BASE_PATH=/sunrisers-nj-site npx playwright test`.

@@ -21,7 +21,9 @@ for (const file of pages) {
       await page.addInitScript(() => document.addEventListener("securitypolicyviolation", (e) => console.error("CSP violation " + e.violatedDirective + " " + e.blockedURI)));
       const res = await page.goto("" + file, { waitUntil: "networkidle" });
       expect(res.status()).toBe(200);
-      expect(res.headers()["content-security-policy"]).toContain("script-src 'self'");
+      // GitHub Pages cannot send headers, so the meta CSP is the policy there; locally the header is checked too.
+      if (!process.env.SITE_ORIGIN) expect(res.headers()["content-security-policy"]).toContain("script-src 'self'");
+      await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveAttribute("content", /script-src 'self'; style-src 'self'/);
       await expect(page.locator("h1")).toHaveCount(1);
       await expect(page).toHaveTitle(/Sunrisers/);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
