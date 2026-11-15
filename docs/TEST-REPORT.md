@@ -40,3 +40,23 @@ Added content tests: no leftover Standard Athletic / play-cricket / Paris text, 
 Bugs found and fixed in this run: unique ids for player cards across squads (the same person is in several squads), reveal sweep for fast scrolling (elements flicked past were left hidden), mobile hero sun kept animating under reduced motion, width transition on result cards (now transform), a dash character in empty stat cells (now "n/a"), the CricClubs word "Null" shown as a role.
 
 New tests: parallax and reduced motion; player cards (counts 29, 25, 20; every value of all 74 players against the saved CricClubs tables; no-stats state; profile links; flags; computed leaders; sort; "Null"; source note; no-JS).
+
+
+## Run of 14 Nov 2026 (night): brand update, squads league selector, league heading highlight
+| Check | Result |
+|---|---|
+| html-validate dist | 0 errors |
+| Playwright (Chrome, desktop 1440 and mobile 390), root build | 219 passed, 5 skipped (touch-only skips: hover and arrow-key tests on mobile; mobile-menu test on desktop), 0 failed |
+| Playwright under the `/sunrisers-nj-site/` mount (subpath build) | see the final report for the exact count |
+| Axe | 0 violations on every page, both viewports (new `--sun` / `--sun-deep` tokens included) |
+| npm audit --audit-level=low | 0 vulnerabilities |
+| Impeccable detect (index, fixtures, teams, about, contact at 1440x900 and 390x844) | 0 findings |
+| Lighthouse (11 pages x mobile and desktop) | Accessibility, Best Practices, SEO 100 everywhere. Performance 99 to 100 (contact-mobile 99, index-mobile 99), CLS 0 to 0.002, mobile LCP 1.7 to 2.0 s. The local test server now gzips text like GitHub Pages does; before that teams-mobile scored 88 to 92 only because the 200 KB HTML was sent uncompressed |
+| Hallmark sloplint (source) | only 404.html: gates 26a, 34, 26b (false positive, it cannot see the shared stylesheet). Colour literals were lifted into tokens (`--veil-*`, `--glow-*`) |
+| Hallmark sloplint --render | gate 44b fixed (home CTA now inside the 1280x800 fold). Remaining: gate 58 words per screen on data-heavy pages, gate 59 section gap (hero to ticker strip is 18px by design) |
+
+New tests: squads league selector (options, All shows 3 squads and 74 cards, each league shows only its squad with leaders and stats, `?league=` deep link and revealed cards, `#team-` hash, unknown league, sort inside a squad, keyboard, no JavaScript); league headings on results and squads (all three styled alike, hover turns each orange and releases, keyboard focus does the same, no transition under reduced motion); the three "on CricClubs" rows identical with a slide-in orange fill; brand assets (phoenix and wordmark loaded, alt text, hero preload and fetchpriority, lazy footer logo, favicon / apple icon / manifest / og:image resolve, AA contrast of the accent tokens); parallax and reduced motion on the new hero texture.
+
+Bugs found and fixed in this run: reduced-motion rule for `.lh` and `.leaguelink` was overridden by later rules (transitions still ran); squads status text said "all 74 squads"; the player-card reveal did one forced layout per card (now batched); the local server lacked avif/jpg/webmanifest types and gzip.
+
+Honest notes: the opaque textures use a jpg fallback (not png) because they have no transparency; `logo-with-text.png` is not used (an overlapping composite of the phoenix and wordmark, both supplied separately); the wordmark source is 800px wide so it is slightly soft on high-density screens.
