@@ -60,3 +60,7 @@ New tests: squads league selector (options, All shows 3 squads and 74 cards, eac
 Bugs found and fixed in this run: reduced-motion rule for `.lh` and `.leaguelink` was overridden by later rules (transitions still ran); squads status text said "all 74 squads"; the player-card reveal did one forced layout per card (now batched); the local server lacked avif/jpg/webmanifest types and gzip.
 
 Honest notes: the opaque textures use a jpg fallback (not png) because they have no transparency; `logo-with-text.png` is not used (an overlapping composite of the phoenix and wordmark, both supplied separately); the wordmark source is 800px wide so it is slightly soft on high-density screens.
+
+
+## Run of 15 Nov 2026 (after midnight): traced vector wordmark
+The hero wordmark is now the supplied Milkstore 02 lettering traced to one crisp SVG path (no glow, blur or filter), inlined with `fill: currentColor` in the cream token; the OG image uses the same vector. The earlier Barlow Condensed SVG text and its font file were removed. Traced shapes overlap the supplied PNG at 98.3 percent (pixel XOR 1.7 percent of the lettering area at a 50 percent alpha cut); tests: one flat path, no text, image or filter, same viewBox, no computed filter or shadow, load entrance without blur, reduced motion still, and an overlap test (IoU above 0.95) against `brand-src/wordmark.png`. See the final run below for totals.

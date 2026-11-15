@@ -327,7 +327,6 @@ const IMG = "assets/img/brand";
 const HOME_PRELOAD = [
   `<link rel="preload" as="image" type="image/avif" media="(min-width: 701px)" href="${IMG}/tex-wide-1280.avif" imagesrcset="${IMG}/tex-wide-1280.avif 1280w, ${IMG}/tex-wide.avif 1920w" imagesizes="100vw" fetchpriority="high">`,
   `<link rel="preload" as="image" type="image/avif" media="(max-width: 700px)" href="${IMG}/tex-tall.avif" fetchpriority="high">`,
-  `<link rel="preload" href="assets/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>`,
 ].join("\n");
 
 function render(file) {
@@ -359,6 +358,7 @@ function render(file) {
     .replace("{{squadlinks}}", renderSquadLinks())
     .replace("{{squadsections}}", renderSquadSections())
     .replace("{{squadfilter}}", renderSquadFilter())
+    .replace("{{wordmark}}", () => readFileSync(join(src, "assets/img/brand/wordmark.svg"), "utf8").trim().replace("<svg ", '<svg width="800" height="516" aria-hidden="true" focusable="false" '))
     .replace("{{form}}", partial("form"));
   const left = html.match(/\{\{[^}]+\}\}/g);
   if (left) throw new Error(`${file}: unresolved tokens ${left.join(", ")}`);

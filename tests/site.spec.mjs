@@ -450,7 +450,7 @@ test.describe("parallax", () => {
 });
 
 test.describe("brand assets", () => {
-  test("phoenix in the header, wordmark as flat SVG text, texture hero, lazy below the fold", async ({ page }) => {
+  test("phoenix in the header, traced vector wordmark, texture hero, lazy below the fold", async ({ page }) => {
     await page.goto("index.html", { waitUntil: "networkidle" });
     const logo = page.locator(".brand__logo");
     await expect(logo).toBeVisible();
@@ -493,25 +493,43 @@ test.describe("brand assets", () => {
   });
 });
 
-test.describe("hero wordmark is flat, crisp SVG text", () => {
-  test("no glow, blur, shadow or filter; flat cream fill; real text in the Barlow Condensed face", async ({ page }) => {
+test.describe("hero wordmark is a flat, crisp traced vector", () => {
+  test("traced vector wordmark: no glow, blur, shadow or filter; one flat cream path; no raster image", async ({ page }) => {
     await page.goto("index.html", { waitUntil: "networkidle" });
     await page.waitForTimeout(1800);
-    const r = await page.evaluate(async () => {
-      await document.fonts.ready;
+    const r = await page.evaluate(() => {
       const mark = document.querySelector("#hero-title");
       const nodes = [mark, mark.querySelector("svg"), ...mark.querySelectorAll("svg *")];
       const bad = nodes.filter((e) => { const c = getComputedStyle(e); return c.filter !== "none" || c.textShadow !== "none" || c.boxShadow !== "none" || c.opacity !== "1"; }).map((e) => e.tagName);
-      const t = mark.querySelector("text");
-      return { bad, fill: getComputedStyle(t).fill, family: getComputedStyle(t).fontFamily, loaded: document.fonts.check('800 40px "Barlow Condensed"'), imgs: mark.querySelectorAll("img").length, words: [...mark.querySelectorAll("text")].map((x) => x.textContent.trim()), box: mark.querySelector("svg").getBoundingClientRect().width };
+      const path = mark.querySelector("svg path");
+      return { bad, fill: getComputedStyle(path).fill, paths: mark.querySelectorAll("svg path").length, texts: mark.querySelectorAll("svg text").length, imgs: mark.querySelectorAll("img").length, filters: mark.querySelectorAll("svg filter, svg [filter], svg defs").length, box: mark.querySelector("svg").getBoundingClientRect().width, view: mark.querySelector("svg").getAttribute("viewBox"), hidden: mark.querySelector("svg").getAttribute("aria-hidden") };
     });
     expect(r.bad).toEqual([]);
     expect(r.fill).toMatch(/^(oklch\(0\.9\d|rgb\(2[3-5]\d)/); // the --on-ink cream, opaque
-    expect(r.family).toContain("Barlow Condensed");
-    expect(r.loaded).toBe(true);
-    expect(r.imgs).toBe(0);
-    expect(r.words).toEqual(["EST. 2017", "SUNRISERS", "CRICKET", "CLUB", "NEW JERSEY USA"]);
+    expect(r.paths).toBe(1);
+    expect(r.texts + r.imgs + r.filters).toBe(0);
+    expect(r.view).toBe("0 0 800 516");
+    expect(r.hidden).toBe("true");
     expect(r.box).toBeGreaterThan(280);
+  });
+
+  test("the traced wordmark covers the supplied lettering (pixel overlap with brand-src/wordmark.png)", async ({ page }) => {
+    await page.goto("index.html", { waitUntil: "networkidle" });
+    await page.waitForTimeout(1800);
+    const png = readFileSync(join(import.meta.dirname, "..", "brand-src", "wordmark.png")).toString("base64");
+    const iou = await page.evaluate(async (b64) => {
+      const img = new Image(); img.src = "data:image/png;base64," + b64; await img.decode();
+      const W = 800, H = 516;
+      const c1 = new OffscreenCanvas(W, H).getContext("2d"); c1.drawImage(img, 0, 0, W, H);
+      const svg = document.querySelector("#hero-title svg").outerHTML.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" color="#fff" ');
+      const im2 = new Image(); im2.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg); await im2.decode();
+      const c2 = new OffscreenCanvas(W, H).getContext("2d"); c2.drawImage(im2, 0, 0, W, H);
+      const a = c1.getImageData(0, 0, W, H).data, b = c2.getImageData(0, 0, W, H).data;
+      let inter = 0, uni = 0;
+      for (let i = 3; i < a.length; i += 4) { const x = a[i] > 128, y = b[i] > 128; if (x && y) inter++; if (x || y) uni++; }
+      return inter / uni;
+    }, png);
+    expect(iou).toBeGreaterThan(0.95);
   });
 
   test("the load entrance only fades and slides (no blur), and is off under reduced motion", async ({ page, browser }) => {

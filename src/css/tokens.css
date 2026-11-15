@@ -1,5 +1,5 @@
 /* Hallmark · shape: scoreboard-and-sunrise sport site · genre: playful (custom, sport) · theme: custom "First Light" (retuned to the supplied brand red-orange) · job: join · idea: "the day starts when the sun clears the boundary rope" · vibe: "orange sun on black, loud condensed type, scoreboard precision"
- * paper: oklch(14% 0.014 35) · accent: oklch(64% 0.205 36) · display: Big Shoulders Display · body: Hanken Grotesk · hero: Settled, centred flat cream SVG wordmark (no glow) over the full-bleed red-orange crinkled foil texture · nav: black bar, wordmark left, links, orange Join · footer: oversized wordmark and the site map
+ * paper: oklch(14% 0.014 35) · accent: oklch(64% 0.205 36) · display: Big Shoulders Display · body: Hanken Grotesk · hero: Settled, centred flat cream traced-SVG wordmark (no glow) over the full-bleed red-orange crinkled foil texture · nav: black bar, wordmark left, links, orange Join · footer: oversized wordmark and the site map
  * surface: committed orange bands are declared surface colour (posture: Committed) · contrast: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: no photography exists yet, so type, sun and scorecards carry the weight; photo slots are built so real club photos drop in */
 
@@ -46,10 +46,9 @@
 
   /* BRAND SLOT 2: fonts (self-hosted in assets/fonts) */
   --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
-  --font-mark: "Barlow Condensed", "Big Shoulders Display", "Arial Narrow", sans-serif; /* hero wordmark lettering */
   --font-body: "Hanken Grotesk", system-ui, sans-serif;
 
-  /* BRAND: logo is the supplied phoenix image in assets/img/brand (tools/build-brand.py); the hero wordmark is live SVG text in src/pages/index.html */
+  /* BRAND: logo is the supplied phoenix image in assets/img/brand (tools/build-brand.py); the hero wordmark is the traced SVG src/assets/img/brand/wordmark.svg (tools/trace-wordmark.py) */
 
   /* layout and rhythm (not brand) */
   --maxw: 1320px;

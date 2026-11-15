@@ -84,7 +84,7 @@ print("phoenix aspect", ph.width / ph.height)
 # ---- 4. wordmark ----
 wm = Image.open(S / "wordmark.png").convert("RGBA"); wm = wm.crop(wm.getbbox())
 print("wordmark", wm.size, "aspect", wm.width / wm.height)
-# the hero wordmark is live SVG text now (src/pages/index.html); the supplied wordmark.png has a baked-in soft halo, so it is not shipped
+# the hero wordmark is the traced vector src/assets/img/brand/wordmark.svg (tools/trace-wordmark.py); the supplied wordmark.png has a baked-in soft halo, so it is not shipped
 
 # ---- 5. icons on a dark ground (maskable-safe padding) ----
 def icon(size, pad=0.14, bg=(18, 8, 4)):
@@ -105,6 +105,8 @@ for x in range(1200):  # darken the left third so the wordmark reads
     d.line([(x, 0), (x, 630)], fill=(0, 0, 0, int(150 * (1 - x / 1200) + 40)))
 og = Image.alpha_composite(og.convert("RGBA"), shade)
 pp = fit(ph, H=470); og.alpha_composite(pp, (70, 80))
-ww = fit(wm, W=560); og.alpha_composite(ww, (560, (630 - ww.height) // 2))
+# the wordmark on the card is the traced vector (flat, no halo): rendered 1600px wide by tools/trace-wordmark.py
+tw = Image.open(S / "wordmark-traced-2x.png").convert("RGBA"); tw = tw.crop(tw.getbbox())
+ww = fit(tw, W=560); og.alpha_composite(ww, (560, (630 - ww.height) // 2))
 og.convert("RGB").save(O / "og-image.jpg", quality=84, optimize=True, progressive=True)
 for p in sorted(O.iterdir()): print(f"{p.name:32s}{p.stat().st_size/1024:8.1f} KB")
