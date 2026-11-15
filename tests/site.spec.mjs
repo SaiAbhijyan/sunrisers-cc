@@ -28,6 +28,17 @@ for (const file of pages) {
       await expect(page).toHaveTitle(/Sunrisers/);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, "horizontal overflow px").toBeLessThanOrEqual(0);
+      // lazy images only load once near the viewport, so walk the page first
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += innerHeight * 0.8) {
+          scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 60));
+        }
+        scrollTo(0, document.body.scrollHeight);
+        await new Promise((r) => setTimeout(r, 400));
+      });
+      await page.waitForLoadState("networkidle");
+      await page.waitForFunction(() => [...document.images].every((i) => i.complete), null, { timeout: 5000 }).catch(() => {});
       const broken = await page.evaluate(() => [...document.images].filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.src));
       expect(broken).toEqual([]);
       expect(problems).toEqual([]);
@@ -416,20 +427,264 @@ const squadsMeta = [
 ];
 
 test.describe("parallax", () => {
-  test("the hero sun moves with scroll, and stays still under reduced motion", async ({ page, browser }) => {
+  test("the hero texture moves with scroll, and stays still under reduced motion", async ({ page, browser }) => {
     await page.goto("index.html");
-    const tf = () => page.$eval(".sun", (e) => getComputedStyle(e).transform + "|" + getComputedStyle(e).animationName);
+    const tf = () => page.$eval(".hero__tex img", (e) => getComputedStyle(e).translate + "|" + getComputedStyle(e).scale + "|" + getComputedStyle(e).animationName);
     const before = await tf();
     await page.evaluate(() => window.scrollTo(0, 500));
-    await page.waitForTimeout(600);
+    await page.waitForTimeout(700);
     const after = await tf();
     expect(after).not.toBe(before);
     const ctx = await browser.newContext({ reducedMotion: "reduce" });
     const p2 = await ctx.newPage();
     await p2.goto(ROOT + "index.html");
-    const a = await p2.$eval(".sun", (e) => getComputedStyle(e).animationName);
-    expect(a).toBe("none");
+    const still = async () => p2.$eval(".hero__tex img", (e) => getComputedStyle(e).translate + "|" + getComputedStyle(e).scale + "|" + getComputedStyle(e).animationName);
+    const s1 = await still();
+    expect(s1.split("|")[2]).toBe("none");
+    await p2.evaluate(() => window.scrollTo(0, 500));
+    await p2.waitForTimeout(500);
+    expect(await still()).toBe(s1);
+    for (const sel of [".hero__mark", ".hero__shade", ".brand__logo"]) expect(await p2.$eval(sel, (e) => getComputedStyle(e).animationName), sel).toBe("none");
     await ctx.close();
+  });
+});
+
+test.describe("brand assets", () => {
+  test("phoenix in the header, wordmark with alt, texture hero, lazy below the fold", async ({ page }) => {
+    await page.goto("index.html", { waitUntil: "networkidle" });
+    const logo = page.locator(".brand__logo");
+    await expect(logo).toBeVisible();
+    expect(await logo.evaluate((i) => i.naturalWidth)).toBeGreaterThan(0);
+    const mark = page.locator("#hero-title img");
+    await expect(mark).toHaveAttribute("alt", /Sunrisers Cricket Club/);
+    expect(await mark.evaluate((i) => i.naturalWidth)).toBeGreaterThan(0);
+    const hero = page.locator(".hero__tex img");
+    await expect(hero).toHaveAttribute("fetchpriority", "high");
+    expect(await hero.evaluate((i) => i.naturalWidth)).toBeGreaterThan(0);
+    const eager = await page.$$eval("main img:not([loading=lazy])", (l) => l.map((i) => i.className));
+    expect(eager.length).toBeLessThanOrEqual(3);
+    await expect(page.locator("img.foot__logo")).toHaveAttribute("loading", "lazy");
+    await expect(page.locator('link[rel="preload"][as="image"]').first()).toHaveCount(1);
+  });
+
+  test("favicon, apple icon, manifest and og:image all resolve", async ({ page, request }) => {
+    await page.goto("index.html");
+    const hrefs = await page.$$eval('link[rel~="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]', (l) => l.map((x) => x.href));
+    expect(hrefs.length).toBeGreaterThanOrEqual(4);
+    for (const h of hrefs) expect((await request.get(h)).status(), h).toBe(200);
+    const og = await page.locator('meta[property="og:image"]').getAttribute("content");
+    expect(og).toMatch(/og-image\.jpg$/);
+    const ogPath = new URL(og).pathname.replace(BASEPATH, "");
+    expect(existsSync(join(dist, ogPath))).toBe(true);
+    const man = JSON.parse(readFileSync(join(dist, "site.webmanifest"), "utf8"));
+    expect(man.icons.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test("accent tokens stay AA against the dark ground and against paper", async ({ page }) => {
+    await page.goto("index.html");
+    const ratio = await page.evaluate(() => {
+      const cv = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+      const rgb = (v) => { const e = document.createElement("i"); e.style.color = v; document.body.append(e); const c = getComputedStyle(e).color; e.remove(); cv.clearRect(0, 0, 1, 1); cv.fillStyle = "#000"; cv.fillStyle = c; cv.fillRect(0, 0, 1, 1); return [...cv.getImageData(0, 0, 1, 1).data].slice(0, 3); };
+      const lum = ([r, g, b]) => { const f = (x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+      const cr = (a, b) => { const [x, y] = [lum(rgb(a)), lum(rgb(b))].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+      return { sunOnInk: cr("var(--sun)", "var(--ink)"), deepOnPaper: cr("var(--sun-deep)", "var(--paper)") };
+    });
+    expect(ratio.sunOnInk).toBeGreaterThanOrEqual(4.5);
+    expect(ratio.deepOnPaper).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+test.describe("league selector on the squads page", () => {
+  const squads = [
+    ["fall-t20-frontier", "Fall T20 Frontier", 29],
+    ["mcl-fall-t20-challenger", "MCL Fall T20 Challenger", 25],
+    ["mcl-f40-div-b", "MCL F40 Div B", 20],
+  ];
+  const visibleIds = (page) => page.$$eval("section[data-squad]:not([hidden])", (g) => g.map((x) => x.dataset.squad));
+
+  test("is a labelled native select with All plus each league", async ({ page }) => {
+    await page.goto("teams.html");
+    const sel = page.getByLabel("League");
+    await expect(sel).toBeVisible();
+    expect(await sel.evaluate((e) => e.tagName)).toBe("SELECT");
+    expect(await sel.locator("option").allTextContents()).toEqual(["All leagues (3 squads)", "Fall T20 Frontier (29 players)", "MCL Fall T20 Challenger (25 players)", "MCL F40 Div B (20 players)"]);
+  });
+
+  test("All shows all three squads and 74 player cards", async ({ page }) => {
+    await page.goto("teams.html");
+    expect(await visibleIds(page)).toEqual(squads.map((x) => x[0]));
+    await expect(page.locator(".pcard:visible")).toHaveCount(74);
+    await expect(page.locator("#filter-status")).toContainText("all 3 squads, 74 players");
+  });
+
+  for (const [id, name, n] of squads) {
+    test(`selecting ${id} shows only that squad (${n} players, stats, leaders)`, async ({ page }) => {
+      await page.goto("teams.html");
+      await page.getByLabel("League").selectOption(id);
+      await expect.poll(() => visibleIds(page)).toEqual([id]);
+      await expect(page.locator(".pcard:visible")).toHaveCount(n);
+      await expect(page.locator(".leaders:visible")).toHaveCount(1);
+      await expect(page.locator(".stats:visible")).toHaveCount(1);
+      await expect(page.locator(`#team-${id} h2`)).toBeVisible();
+      await expect(page.locator("#filter-status")).toContainText(`${name} squad, ${n} players`);
+      expect(new URL(page.url()).searchParams.get("league")).toBe(id);
+      // cards of the other squads are really hidden, not just offscreen
+      for (const other of squads.filter((x) => x[0] !== id)) await expect(page.locator(`#team-${other[0]}`)).toBeHidden();
+      await page.getByLabel("League").selectOption("all");
+      await expect(page.locator(".pcard:visible")).toHaveCount(74);
+      expect(new URL(page.url()).searchParams.get("league")).toBeNull();
+    });
+
+    test(`deep link ?league=${id} preselects it and the cards are revealed`, async ({ page }) => {
+      await page.goto(`teams.html?league=${id}`);
+      await expect(page.getByLabel("League")).toHaveValue(id);
+      expect(await visibleIds(page)).toEqual([id]);
+      // scroll down the squad: every card must reveal (none stuck at opacity 0 after the swap)
+      await page.evaluate(async (sid) => {
+        const el = document.getElementById("team-" + sid);
+        const end = el.getBoundingClientRect().bottom + scrollY;
+        for (let y = el.getBoundingClientRect().top + scrollY; y < end; y += innerHeight * 0.6) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
+        await new Promise((r) => setTimeout(r, 1200));
+      }, id);
+      const opacity = await page.$$eval(`#team-${id} .pcard`, (c) => c.map((e) => +getComputedStyle(e).opacity));
+      expect(Math.min(...opacity)).toBeGreaterThan(0.95);
+    });
+  }
+
+  test("an old #team-... link preselects that squad", async ({ page }) => {
+    await page.goto("teams.html#team-mcl-f40-div-b");
+    await expect(page.getByLabel("League")).toHaveValue("mcl-f40-div-b");
+    expect(await visibleIds(page)).toEqual(["mcl-f40-div-b"]);
+  });
+
+  test("unknown ?league= falls back to All", async ({ page }) => {
+    await page.goto("teams.html?league=nope");
+    await expect(page.getByLabel("League")).toHaveValue("all");
+    await expect(page.locator(".pcard:visible")).toHaveCount(74);
+  });
+
+  test("the player sort still works inside a selected squad", async ({ page }) => {
+    await page.goto("teams.html?league=mcl-f40-div-b");
+    const sort = page.locator("#team-mcl-f40-div-b select").first();
+    await expect(sort).toBeVisible();
+    const before = await page.$$eval("#team-mcl-f40-div-b .pcard h3", (h) => h.map((x) => x.textContent.trim()));
+    const opts = await sort.locator("option").evaluateAll((o) => o.map((x) => x.value));
+    await sort.selectOption(opts[opts.length - 1]);
+    const after = await page.$$eval("#team-mcl-f40-div-b .pcard h3", (h) => h.map((x) => x.textContent.trim()));
+    expect(after.length).toBe(before.length);
+    expect(after.slice().sort()).toEqual(before.slice().sort());
+  });
+
+  test("keyboard: arrow keys change the squad", async ({ page, isMobile }) => {
+    test.skip(isMobile, "native picker on touch");
+    await page.goto("teams.html");
+    await page.getByLabel("League").focus();
+    await page.keyboard.press("ArrowDown");
+    await expect(page.locator(".pcard:visible")).toHaveCount(29);
+  });
+
+  test("no JavaScript: selector hidden and all three squads shown", async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(ROOT + "teams.html?league=mcl-f40-div-b");
+    await expect(page.locator("#league-select")).toBeHidden();
+    await expect(page.locator("section[data-squad]:visible")).toHaveCount(3);
+    await expect(page.locator(".pcard:visible")).toHaveCount(74);
+    await ctx.close();
+  });
+});
+
+test.describe("league headings highlight on hover and focus", () => {
+  const accent = (page, el) =>
+    el.evaluate((e) => {
+      const probe = document.createElement("i");
+      probe.style.color = e.closest(".band--paper") ? "var(--sun-deep)" : "var(--sun)";
+      document.body.append(probe);
+      const c = getComputedStyle(probe).color;
+      probe.remove();
+      return c;
+    });
+  const color = (el) => el.evaluate((e) => getComputedStyle(e).color);
+
+  for (const [file, sel] of [["fixtures.html", ".league-group__h .lh"], ["teams.html", "section[data-squad] h2 .lh"]]) {
+    test(`${file}: every league heading is styled alike, not just the first`, async ({ page }) => {
+      await page.goto(file);
+      const links = page.locator(sel);
+      await expect(links).toHaveCount(3);
+      const rest = await links.evaluateAll((l) => l.map((e) => { const s = getComputedStyle(e); return [s.textDecorationLine, s.transitionProperty, s.transitionDuration, e.className, e.tagName]; }));
+      expect(new Set(rest.map((r) => r.join("|"))).size).toBe(1);
+      const dur = rest[0][2].split(",").map((x) => parseFloat(x));
+      expect(Math.max(...dur)).toBeGreaterThanOrEqual(0.2);
+      expect(Math.min(...dur)).toBeGreaterThan(0.19);
+      expect(Math.max(...dur)).toBeLessThanOrEqual(0.3);
+    });
+
+    test(`${file}: hover turns each of the three headings orange, and releases`, async ({ page, isMobile }) => {
+      test.skip(isMobile, "no hover on touch");
+      await page.goto(file);
+      const links = page.locator(sel);
+      for (let i = 0; i < 3; i++) {
+        const l = links.nth(i);
+        await l.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(500);
+        const rest = await color(l);
+        await l.hover();
+        await page.waitForTimeout(450);
+        const hot = await color(l);
+        expect(hot, `heading ${i} hover`).toBe(await accent(page, l));
+        expect(hot).not.toBe(rest);
+        const underline = await l.evaluate((e) => getComputedStyle(e).backgroundSize);
+        expect(underline).toMatch(/^100%/);
+        await page.mouse.move(2, 2);
+        await page.waitForTimeout(450);
+        expect(await color(l), `heading ${i} release`).toBe(rest);
+      }
+    });
+
+    test(`${file}: keyboard focus gives each heading the same orange highlight`, async ({ page }) => {
+      await page.goto(file);
+      const links = page.locator(sel);
+      for (let i = 0; i < 3; i++) {
+        const l = links.nth(i);
+        const rest = await color(l);
+        await l.focus();
+        await page.keyboard.press("Shift+Tab");
+        await page.keyboard.press("Tab");
+        await page.waitForTimeout(450);
+        expect(await l.evaluate((e) => e.matches(":focus-visible"))).toBe(true);
+        expect(await color(l), `heading ${i} focus`).toBe(await accent(page, l));
+        expect(await color(l)).not.toBe(rest);
+      }
+    });
+
+    test(`${file}: no transition under reduced motion (instant)`, async ({ browser }) => {
+      const ctx = await browser.newContext({ reducedMotion: "reduce" });
+      const page = await ctx.newPage();
+      await page.goto(ROOT + file);
+      const d = await page.$$eval(sel, (l) => l.map((e) => getComputedStyle(e).transitionDuration));
+      expect(d.length).toBe(3);
+      for (const x of d) expect(x.split(",").every((v) => parseFloat(v) === 0), x).toBe(true);
+      await ctx.close();
+    });
+  }
+
+  test("squads: the three 'on CricClubs' rows are identical, with an orange fill on hover and focus", async ({ page, isMobile }) => {
+    await page.goto("fixtures.html");
+    const rows = page.locator(".leaguelink");
+    await expect(rows).toHaveCount(3);
+    expect(await rows.evaluateAll((r) => r.map((e) => e.className))).toEqual(["leaguelink", "leaguelink", "leaguelink"]);
+    await expect(page.locator("main .btn--sun")).toHaveCount(0);
+    for (let i = 0; i < 3; i++) {
+      const r = rows.nth(i);
+      await r.scrollIntoViewIfNeeded();
+      const rest = await r.evaluate((e) => getComputedStyle(e, "::before").transform);
+      if (!isMobile) await r.hover();
+      else await r.focus();
+      await page.waitForTimeout(500);
+      const fill = await r.evaluate((e) => getComputedStyle(e, "::before").transform);
+      expect(fill).not.toBe(rest);
+      expect(fill).toMatch(/matrix\(1,/);
+    }
   });
 });
 

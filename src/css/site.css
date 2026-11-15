@@ -55,7 +55,8 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .masthead { position: sticky; top: 0; z-index: 50; background: color-mix(in oklch, var(--ink) 94%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--ink-3); }
 .masthead__inner { width: min(100% - 2 * var(--gutter), var(--maxw)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.5rem; }
 .brand { display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none; flex-shrink: 0; }
-.brand__logo { width: 2.75rem; height: 2.75rem; }
+.brand__logo { width: 2.9rem; height: auto; aspect-ratio: 96 / 93; transition: rotate 240ms ease, scale 240ms ease; }
+.brand:hover .brand__logo, .brand:focus-visible .brand__logo { rotate: -5deg; scale: 1.07; }
 .brand__name { font: 900 clamp(1.15rem, 4.6vw, 1.5rem)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.005em; }
 .brand__sub { color: var(--sun); }
 .nav { display: flex; align-items: center; gap: 1.5rem; }
@@ -91,6 +92,7 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .band { position: relative; padding-block: clamp(5rem, 11vw, 9.5rem); }
 .band--ink { background: var(--ink); color: var(--on-ink); }
 .band--ink2 { background: var(--ink-2); color: var(--on-ink); }
+.band--tex { color: var(--on-ink); background-color: var(--ink); background-image: linear-gradient(var(--veil-74), var(--veil-74)), url("../assets/img/brand/tex-band.jpg"); background-image: linear-gradient(var(--veil-74), var(--veil-74)), image-set(url("../assets/img/brand/tex-band.avif") type("image/avif"), url("../assets/img/brand/tex-band.webp") type("image/webp"), url("../assets/img/brand/tex-band.jpg") type("image/jpeg")); background-size: cover; background-position: center; }
 .band--sun { background: var(--sun); color: var(--on-sun); overflow: clip; }
 .band--sun::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: max(var(--gutter), calc((100% - var(--maxw)) / 2)); background: linear-gradient(calc(180deg + var(--slash)), transparent 0 14%, var(--ink) 14% 15.5%, transparent 15.5% 33%, var(--ink) 33% 36%, transparent 36% 54%, var(--ink) 54% 59%, transparent 59% 76%, var(--ink) 76% 84%, transparent 84%); mask: linear-gradient(to left, var(--ink) 20%, transparent); -webkit-mask: linear-gradient(to left, var(--ink) 20%, transparent); pointer-events: none; }
 .band--sun > .wrap { position: relative; z-index: 1; }
@@ -99,33 +101,19 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .band__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.5rem var(--colgap); margin-bottom: clamp(2rem, 4vw, 3.5rem); }
 .band__head p { margin: 0; }
 
-/* ---------- home hero ---------- */
-.hero { color: var(--on-ink); position: relative; min-height: min(100svh - 4.5rem, 56rem); display: grid; align-items: end; overflow: clip; isolation: isolate; background: var(--ink); }
-.hero__sky { position: absolute; inset: 0; z-index: -3; background: radial-gradient(120% 70% at 72% 100%, color-mix(in oklch, var(--sun) 38%, var(--ink)) 0%, color-mix(in oklch, var(--sun-deep) 16%, var(--ink)) 38%, var(--ink) 72%); }
-.sun { position: absolute; z-index: -2; right: clamp(-12rem, -8vw, -2rem); bottom: 0; width: clamp(24rem, 62vw, 56rem); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 38%, var(--flare) 0%, var(--sun) 46%, var(--sun-deep) 100%); transform: translateY(46%); }
-.js .sun { animation: rise 1800ms var(--ease) 150ms both; }
-@keyframes rise { from { transform: translateY(105%); } to { transform: translateY(46%); } }
-.sun__cut { position: absolute; inset: 0; border-radius: 50%; overflow: clip; }
-.sun__cut i { position: absolute; left: -10%; width: 120%; background: var(--ink); transform: skewY(calc(-1 * var(--slash))); }
-.sun__cut i:nth-child(1) { top: 24%; height: 3.2%; }
-.sun__cut i:nth-child(2) { top: 36%; height: 5.5%; }
-.sun__cut i:nth-child(3) { top: 50%; height: 8%; }
-.sun__cut i:nth-child(4) { top: 66%; height: 11%; }
-.js .sun__cut i { animation: slide 1600ms var(--ease) 900ms both; }
-.js .sun__cut i:nth-child(even) { animation-delay: 1050ms; animation-name: slide-r; }
-@keyframes slide { from { transform: translateX(-60%) skewY(calc(-1 * var(--slash))); } to { transform: translateX(0) skewY(calc(-1 * var(--slash))); } }
-@keyframes slide-r { from { transform: translateX(60%) skewY(calc(-1 * var(--slash))); } to { transform: translateX(0) skewY(calc(-1 * var(--slash))); } }
-.hero__horizon { color: var(--on-ink); position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: clamp(5rem, 12vw, 9rem); background: var(--ink); clip-path: polygon(0 36%, 100% 0, 100% 100%, 0 100%); }
-.hero__inner { padding-block: clamp(2rem, 5vw, 4.5rem) clamp(5rem, 11vw, 9rem); }
-.hero h1 { max-width: 9ch; }
-.hero h1 span { display: block; }
-.hero .lede { margin-block: clamp(1.25rem, 2.5vw, 2rem); color: var(--on-ink); }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
-.js .hero h1 span, .js .hero .lede, .js .hero__actions { animation: up 900ms var(--ease) both; }
-.js .hero h1 span:nth-child(2) { animation-delay: 120ms; }
-.js .hero h1 span:nth-child(3) { animation-delay: 240ms; }
-.js .hero .lede { animation-delay: 420ms; }
-.js .hero__actions { animation-delay: 540ms; }
+/* ---------- home hero: supplied wordmark, centred, over the red-orange foil texture ---------- */
+.hero { position: relative; min-height: min(100svh - 4.5rem, 56rem); display: grid; place-items: center; overflow: clip; isolation: isolate; background: var(--ink); color: var(--on-ink); }
+.hero__tex { position: absolute; inset: 0; z-index: -3; }
+.hero__tex img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.hero__shade { position: absolute; inset: 0; z-index: -2; background: radial-gradient(56% 50% at 50% 47%, var(--veil-60), transparent 74%), linear-gradient(to bottom, var(--veil-50), transparent 24%, transparent 64%, var(--ink) 100%); }
+.hero__center { display: grid; justify-items: center; text-align: center; padding-block: clamp(2rem, 4vw, 3rem) clamp(4rem, 9vw, 7rem); }
+.hero__mark { margin: 0; width: min(44rem, 88vw); }
+.hero__mark img { width: 100%; height: auto; filter: drop-shadow(0 0 0.3rem var(--glow-white)) drop-shadow(0 0 1.8rem var(--glow-sun)); }
+.hero .lede { margin: clamp(1rem, 2vw, 1.5rem) auto; color: var(--on-ink); max-width: 38ch; text-shadow: 0 1px 14px var(--veil-74); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; justify-content: center; align-items: center; }
+.js .hero .lede, .js .hero__actions { animation: up 900ms var(--ease) both; }
+.js .hero .lede { animation-delay: 520ms; }
+.js .hero__actions { animation-delay: 640ms; }
 @keyframes up { from { opacity: 0; transform: translateY(2rem); } to { opacity: 1; transform: none; } }
 
 /* ---------- marquee ---------- */
@@ -216,7 +204,7 @@ html { scrollbar-color: var(--sun) var(--ink); }
 
 /* ---------- inner page hero ---------- */
 .phero { color: var(--on-ink); position: relative; overflow: clip; isolation: isolate; padding-block: clamp(3.5rem, 8vw, 7rem) clamp(4rem, 9vw, 8rem); background: var(--ink); }
-.phero::before { content: ""; position: absolute; z-index: -1; right: -8%; bottom: 0; width: clamp(18rem, 46vw, 40rem); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 38%, var(--flare), var(--sun) 48%, var(--sun-deep)); transform: translateY(64%); }
+.phero::before { content: ""; position: absolute; z-index: -1; inset: -10% 0; background-color: var(--ink); background-image: linear-gradient(90deg, var(--ink) 0 22%, var(--veil-55) 60%, var(--veil-15)), url("../assets/img/brand/tex-band.jpg"); background-image: linear-gradient(90deg, var(--ink) 0 22%, var(--veil-55) 60%, var(--veil-15)), image-set(url("../assets/img/brand/tex-band.avif") type("image/avif"), url("../assets/img/brand/tex-band.webp") type("image/webp"), url("../assets/img/brand/tex-band.jpg") type("image/jpeg")); background-size: cover; background-position: center; }
 .phero::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: clamp(2rem, 5vw, 4rem); background: var(--ink-2); clip-path: polygon(0 100%, 100% 0, 100% 100%); }
 .phero h1 { font-size: clamp(3.5rem, 12vw, 9rem); line-height: 0.88; max-width: 12ch; }
 .phero .lede { margin-top: 1.5rem; color: var(--on-ink); }
@@ -263,9 +251,9 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .nf h1 { font-size: clamp(7rem, 30vw, 22rem); line-height: 1; color: var(--sun); }
 
 /* ---------- footer ---------- */
-.foot { background: var(--ink); border-top: 1px solid var(--ink-3); padding-top: clamp(3rem, 7vw, 6rem); overflow: clip; }
+.foot { background-color: var(--ink); background-image: linear-gradient(var(--veil-84), var(--veil-90)), url("../assets/img/brand/tex-band.jpg"); background-image: linear-gradient(var(--veil-84), var(--veil-90)), image-set(url("../assets/img/brand/tex-band.avif") type("image/avif"), url("../assets/img/brand/tex-band.webp") type("image/webp"), url("../assets/img/brand/tex-band.jpg") type("image/jpeg")); background-size: cover; background-position: center; border-top: 2px solid var(--sun); padding-top: clamp(3rem, 7vw, 6rem); overflow: clip; }
 .foot .foot__word { font: 900 clamp(4rem, 17.5vw, 15rem)/1 var(--font-display); text-transform: uppercase; color: var(--sun); margin: 0 0 2.5rem; max-width: none; white-space: nowrap; font-size: clamp(4rem, 17.5vw, 15rem); user-select: none; }
-.foot__grid { display: grid; grid-template-columns: 1.3fr 1fr 1.3fr; gap: var(--colgap); }
+.foot__grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: var(--colgap); }
 @media (max-width: 899px) { .foot__grid { grid-template-columns: minmax(0, 1fr); } }
 .foot__h { font: 900 1.35rem/1 var(--font-display); text-transform: uppercase; margin-bottom: 1rem; color: var(--sun); }
 .foot__links { columns: 2; column-gap: 1.5rem; }
@@ -282,26 +270,21 @@ html { scrollbar-color: var(--sun) var(--ink); }
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .js .sun, .js .sun__cut i, .js .hero h1 span, .js .hero .lede, .js .hero__actions, .js .phero h1, .js .phero .lede { animation: none; }
-  .sun { transform: translateY(46%); }
+  .js .hero .lede, .js .hero__actions, .js .phero h1, .js .phero .lede { animation: none; }
+  .brand__logo, .lh, .lh::after, .leaguelink, .leaguelink::before, .leaguelink__go { transition: none; }
   .js .reveal { opacity: 1; translate: none; transition: none; }
   .btn, .score, .teamlist__link, .teamlist__name, .teamlist__meta, .teamlist__link::before, .nav__link::after, .link-arrow { transition: none; }
 }
 
 .note { margin-top: 1.5rem; }
 
-@media (max-width: 479px) { .brand__sub { display: none; } .brand__logo { width: 2.25rem; height: 2.25rem; } .menu-toggle { padding-inline: 0.8rem; } }
+@media (max-width: 479px) { .brand__sub { display: none; } .brand__logo { width: 2.4rem; } .menu-toggle { padding-inline: 0.8rem; } }
 .gap-top { margin-top: 2rem; margin-bottom: 2rem; }
 
 @media (max-width: 700px) {
-  .hero { min-height: 0; }
-  .hero__inner { padding-top: 19rem; }
-  .sun { top: 1.5rem; bottom: auto; right: -6rem; width: 21rem; transform: none; }
-  @keyframes rise-m { from { transform: translateY(40%); opacity: 0; } to { transform: none; opacity: 1; } }
-  .hero__horizon { height: 4rem; }
+  .hero { min-height: min(100svh - 4.5rem, 44rem); }
+  .hero__center { padding-block: 3rem 5rem; }
 }
-@media (max-width: 700px) and (prefers-reduced-motion: reduce) { .sun { transform: none; } }
-@media (max-width: 700px) and (prefers-reduced-motion: no-preference) { .js .sun { animation: rise-m 1500ms var(--ease) 150ms both; } }
 .ph + p, .ph + .link-arrow { margin-top: 1.25rem; }
 .marquee__item:last-child::after { display: none; }
 .photowall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(14rem, 18rem)); gap: 1.25rem; }
@@ -350,9 +333,9 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .psort__label { font-weight: 700; font-size: 0.95rem; }
 .players { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
 .pcard { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: 0.9rem 1rem; align-content: start; padding: 1rem; background: var(--ink); color: var(--on-ink); border: 1px solid var(--ink-3); scroll-margin-top: 6rem; }
-.band--ink .pcard { background: var(--ink-2); }
+.band--ink .pcard { background: var(--ink-2); color: var(--on-ink); }
 .pcard:target { outline: 3px solid var(--sun); outline-offset: 2px; }
-.pcard__photo { width: 5.25rem; aspect-ratio: 1; background: var(--ink-3); clip-path: polygon(0 0, 100% 0, 100% 78%, 78% 100%, 0 100%); }
+.pcard__photo { width: 5.25rem; aspect-ratio: 1; background: var(--ink-3); color: var(--on-ink); clip-path: polygon(0 0, 100% 0, 100% 78%, 78% 100%, 0 100%); }
 .pcard__head { min-width: 0; display: grid; gap: 0.3rem; justify-items: start; align-content: start; }
 .pcard__name { font: 900 1.65rem/1 var(--font-display); text-transform: uppercase; margin: 0; overflow-wrap: anywhere; }
 .pcard__role { margin: 0; color: var(--sun); font-weight: 700; }
@@ -370,3 +353,24 @@ html { scrollbar-color: var(--sun) var(--ink); }
 @media (max-width: 599px) { .pstat__cell dd { font-size: 1.15rem; } .pstat__grid { gap: 0.4rem 0.35rem; } }
 
 .band > .wrap > p.small.dim { max-width: 62ch; }
+
+/* ---------- league names: one consistent, interactive treatment ---------- */
+.lh { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 0.07em no-repeat; padding-bottom: 0.05em; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: color 200ms ease, background-size 280ms var(--ease); }
+.lh:hover, .lh:focus-visible { color: var(--sun); background-size: 100% 0.07em; }
+:where(.band--paper) .lh:hover, :where(.band--paper) .lh:focus-visible { color: var(--sun-deep); }
+.lh__go { display: inline-block; width: 0.5em; height: 0.5em; margin-left: 0.2em; background: currentColor; mask: var(--arrow) center / contain no-repeat; -webkit-mask: var(--arrow) center / contain no-repeat; opacity: 0; translate: -0.35em 0; transition: opacity 200ms ease, translate 280ms var(--ease); }
+.lh:hover .lh__go, .lh:focus-visible .lh__go { opacity: 1; translate: 0 0; }
+.leaguelinks { display: grid; border-top: 2px solid var(--ink-3); }
+.leaguelink { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0.25rem; border-bottom: 2px solid var(--ink-3); font-weight: 700; text-decoration: none; transition: color 200ms ease; }
+.leaguelink::before { content: ""; position: absolute; inset: 0 -0.75rem; background: var(--sun); transform: scaleX(0); transform-origin: left; transition: transform 280ms var(--ease); z-index: -1; }
+.leaguelink:hover, .leaguelink:focus-visible { color: var(--on-sun); }
+.leaguelink:hover::before, .leaguelink:focus-visible::before { transform: scaleX(1); }
+.leaguelink__go { width: 1.1rem; height: 1.1rem; flex: none; background: currentColor; mask: var(--arrow) center / contain no-repeat; -webkit-mask: var(--arrow) center / contain no-repeat; transition: translate 280ms var(--ease); }
+.leaguelink:hover .leaguelink__go, .leaguelink:focus-visible .leaguelink__go { translate: 0.35rem 0; }
+
+.foot__logo { width: 4.5rem; height: auto; margin-bottom: 1rem; }
+
+/* reduced motion wins over the later hover and highlight rules above */
+@media (prefers-reduced-motion: reduce) {
+  .lh, .lh__go, .leaguelink, .leaguelink::before, .leaguelink__go { transition: none; }
+}

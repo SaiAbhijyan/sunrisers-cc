@@ -99,7 +99,7 @@ function renderFilter() {
   const total = allMatches().length;
   return `<div class="filterbar js-only"><div class="filter">
   <label class="filter__label" for="league-select">League</label>
-  <select class="filter__select" id="league-select" aria-controls="league-results" aria-describedby="filter-status">
+  <select class="filter__select" id="league-select" aria-controls="league-results" aria-describedby="filter-status" data-text-all="Showing all {n} matches, grouped by league." data-text-one="Showing {n} matches in {name}.">
     <option value="all">All leagues (${total} matches)</option>
     ${club.squads.map((q) => `<option value="${esc(q.id)}">${esc(q.leagueName)} (${q.matches.length} matches)</option>`).join("\n    ")}
   </select>
@@ -107,12 +107,24 @@ function renderFilter() {
 <p class="small dim filterbar__status" id="filter-status" role="status" aria-live="polite">Showing all ${total} matches, grouped by league.</p></div>`;
 }
 
+// Squads page selector, same pattern as the results one: native select, hidden without JS (every squad shows).
+function renderSquadFilter() {
+  return `<div class="filterbar filterbar--squads js-only"><div class="wrap"><div class="filter">
+  <label class="filter__label" for="league-select">League</label>
+  <select class="filter__select" id="league-select" aria-controls="league-results" aria-describedby="filter-status" data-text-all="Showing all ${club.squads.length} squads, {n} players." data-text-one="Showing the {name} squad, {n} players.">
+    <option value="all">All leagues (${club.squads.length} squads)</option>
+    ${club.squads.map((q) => `<option value="${esc(q.id)}">${esc(q.leagueName)} (${q.players.length} players)</option>`).join("\n    ")}
+  </select>
+</div>
+<p class="small dim filterbar__status" id="filter-status" role="status" aria-live="polite">Showing all ${club.squads.length} squads, ${club.squads.reduce((a, s) => a + (s.players?.length || 0), 0)} players.</p></div></div>`;
+}
+
 // All matches, grouped by league (newest first inside each group). The JS selector shows or hides whole groups.
 function renderGrouped() {
   const groups = club.squads.map((q) => {
     const rows = [...q.matches].sort((x, y) => y.date.localeCompare(x.date) || Number(y.matchId) - Number(x.matchId));
-    return `<section class="league-group" data-league="${esc(q.id)}" aria-labelledby="lg-${esc(q.id)}">
-  <h3 class="league-group__h" id="lg-${esc(q.id)}">${esc(q.leagueName)} <span class="league-group__n">${q.matches.length} matches</span></h3>
+    return `<section class="league-group" data-league="${esc(q.id)}" data-total="${q.matches.length}" aria-labelledby="lg-${esc(q.id)}">
+  <h3 class="league-group__h" id="lg-${esc(q.id)}"><a class="lh" href="teams.html?league=${esc(q.id)}">${esc(q.leagueName)}<span class="lh__go" aria-hidden="true"></span></a> <span class="league-group__n">${q.matches.length} matches</span></h3>
   <p class="small dim">${esc(q.series)}, ${esc(q.organiser)}. CricClubs team name: ${esc(q.cc)}.</p>
   <ol class="scores">
 ${rows.map((m) => scorecard({ q, m })).join("\n")}
@@ -225,11 +237,11 @@ function renderPlayer(q, p) {
 function renderSquadSections() {
   return club.squads
     .map(
-      (q, i) => `<section class="band ${BANDS[i % 3]}" id="${squadSlug(q)}" data-squad="${esc(q.id)}">
+      (q, i) => `<section class="band ${BANDS[i % 3]}" id="${squadSlug(q)}" data-squad="${esc(q.id)}" data-league="${esc(q.id)}" data-total="${q.players.length}">
   <div class="wrap">
     <div class="split">
       <div>
-        <h2 class="display-l">${esc(squadTitle(q))}</h2>
+        <h2 class="display-l"><a class="lh" href="fixtures.html?league=${esc(q.id)}">${esc(squadTitle(q))}<span class="lh__go" aria-hidden="true"></span></a></h2>
         <p class="lede">${esc(q.series)}, ${esc(q.organiser)}. On CricClubs the team is called “${esc(q.cc)}”.</p>
         <h3 class="stats__h">Season summary</h3>
         ${renderStats(q)}
@@ -267,10 +279,11 @@ function renderSquadSections() {
     .join("\n");
 }
 
+// One consistent row per league (they used to be a button for the first and plain links for the rest).
 function renderSquadLinks() {
-  return club.squads
-    .map((q, i) => `<p><a class="${i === 0 ? "btn btn--sun" : "link-arrow"}" href="${esc(q.teamUrl)}">${esc(q.leagueName)} on CricClubs</a></p>`)
-    .join("\n        ");
+  return `<ul class="leaguelinks">\n${club.squads
+    .map((q) => `        <li><a class="leaguelink" href="${esc(q.teamUrl)}"><span class="leaguelink__t">${esc(q.leagueName)} on CricClubs</span><span class="leaguelink__go" aria-hidden="true"></span></a></li>`)
+    .join("\n")}\n      </ul>`;
 }
 
 const updatedNote = () => `<p class="small dim note">Last updated ${esc(club.updated)} from CricClubs.</p>`;
@@ -309,6 +322,14 @@ function externalise(html) {
   });
 }
 
+const IMG = "assets/img/brand";
+// The home hero image is the largest paint: preload the exact candidate the browser will pick (avif, by screen width).
+const HOME_PRELOAD = [
+  `<link rel="preload" as="image" type="image/avif" media="(min-width: 701px)" href="${IMG}/tex-wide-1280.avif" imagesrcset="${IMG}/tex-wide-1280.avif 1280w, ${IMG}/tex-wide.avif 1920w" imagesizes="100vw" fetchpriority="high">`,
+  `<link rel="preload" as="image" type="image/avif" media="(max-width: 700px)" href="${IMG}/tex-tall.avif" fetchpriority="high">`,
+  `<link rel="preload" as="image" type="image/avif" href="${IMG}/wordmark-800.avif" imagesrcset="${IMG}/wordmark-480.avif 480w, ${IMG}/wordmark-800.avif 800w" imagesizes="(max-width: 700px) 88vw, 720px">`,
+].join("\n");
+
 function render(file) {
   const { meta, body } = parsePage(readFileSync(join(src, "pages", file), "utf8"));
   const name = file.replace(/\.html$/, "");
@@ -321,6 +342,8 @@ function render(file) {
     .replace(/\{\{title\}\}/g, esc(title))
     .replace(/\{\{description\}\}/g, esc(meta.description))
     .replace("{{canonical}}", canonical)
+    .replace("{{ogimage}}", `${SITE_URL}/assets/img/brand/og-image.jpg`)
+    .replace("{{headextra}}", isHome ? HOME_PRELOAD : "")
     .replace("{{robots}}", is404 ? '<meta name="robots" content="noindex">' : "")
     .replace("{{bodyclass}}", esc(meta.class || ""))
     .replace("{{header}}", headerHtml(meta.nav || ""))
@@ -335,10 +358,14 @@ function render(file) {
     .replace("{{teams}}", renderTeams())
     .replace("{{squadlinks}}", renderSquadLinks())
     .replace("{{squadsections}}", renderSquadSections())
+    .replace("{{squadfilter}}", renderSquadFilter())
     .replace("{{form}}", partial("form"));
   const left = html.match(/\{\{[^}]+\}\}/g);
   if (left) throw new Error(`${file}: unresolved tokens ${left.join(", ")}`);
-  if (is404) html = html.replace(/(href|src)="(?!https?:|#|\/|data:)/g, '$1="/');
+  if (is404) {
+    html = html.replace(/(href|src)="(?!https?:|#|\/|data:)/g, '$1="/');
+    html = html.replace(/srcset="[^"]*"/g, (m) => m.replace(/(srcset="|, )(?=assets\/)/g, "$1/")); // the 404 page is served from any depth
+  }
   html = html.replace(/(?<=[A-Za-z])'(?=[A-Za-z])/g, "\u2019"); // typographic apostrophes
   return externalise(html);
 }
@@ -346,7 +373,13 @@ function render(file) {
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
 const pages = readdirSync(join(src, "pages")).filter((f) => f.endsWith(".html"));
-const rebase = (html) => (BASE_PATH ? html.replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE_PATH}/`) : html);
+const rebase = (html) =>
+  BASE_PATH
+    ? html
+        .replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE_PATH}/`)
+        .replace(/srcset="[^"]*"/g, (m) => m.replace(/(srcset="|, )\/(?!\/)/g, `$1${BASE_PATH}/`))
+        .replace(/(imagesrcset)="[^"]*"/g, (m) => m.replace(/(imagesrcset="|, )\/(?!\/)/g, `$1${BASE_PATH}/`))
+    : html;
 for (const f of pages) writeFileSync(join(dist, f), rebase(render(f)));
 
 mkdirSync(join(dist, "css"), { recursive: true });
@@ -361,6 +394,14 @@ writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable
     .map((f) => `  <url><loc>${SITE_URL}/${f === "index.html" ? "" : f}</loc></url>`)
     .join("\n")}\n</urlset>\n`
+);
+writeFileSync(
+  join(dist, "site.webmanifest"),
+  JSON.stringify({
+    name: "Sunrisers Cricket Club, New Jersey USA", short_name: "Sunrisers", start_url: "./index.html", scope: "./", display: "standalone",
+    background_color: "#0f0705", theme_color: "#0f0705",
+    icons: [{ src: "assets/img/brand/icon-192.png", sizes: "192x192", type: "image/png" }, { src: "assets/img/brand/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }],
+  }, null, 2) + "\n"
 );
 writeFileSync(join(dist, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 

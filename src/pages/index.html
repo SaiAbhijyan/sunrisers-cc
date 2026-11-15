@@ -5,14 +5,28 @@ nav: home
 class: home
 ---
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__sky" aria-hidden="true"></div>
-  <div class="sun" aria-hidden="true"><div class="sun__cut"><i></i><i></i><i></i><i></i></div></div>
-  <div class="hero__horizon" aria-hidden="true"></div>
-  <div class="wrap hero__inner">
-    <h1 id="hero-title" class="display-xl"><span>Rise</span><span>and</span><span>play.</span></h1>
-    <p class="lede">Sunrisers, a cricket team in New Jersey, USA. Three leagues, one 2026 season.</p>
+  <picture class="hero__tex">
+    <source media="(max-width: 700px)" type="image/avif" srcset="assets/img/brand/tex-tall.avif">
+    <source media="(max-width: 700px)" type="image/webp" srcset="assets/img/brand/tex-tall.webp">
+    <source type="image/avif" srcset="assets/img/brand/tex-wide-1280.avif 1280w, assets/img/brand/tex-wide.avif 1920w" sizes="100vw">
+    <source type="image/webp" srcset="assets/img/brand/tex-wide-1280.webp 1280w, assets/img/brand/tex-wide.webp 1920w" sizes="100vw">
+    <img src="assets/img/brand/tex-wide-1280.jpg" srcset="assets/img/brand/tex-wide-1280.jpg 1280w, assets/img/brand/tex-wide.jpg 1920w" sizes="100vw" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="wrap hero__center">
+    <h1 id="hero-title" class="hero__mark">
+      <picture>
+        <source media="(max-width: 480px)" type="image/avif" srcset="assets/img/brand/wordmark-480.avif">
+        <source media="(max-width: 480px)" type="image/webp" srcset="assets/img/brand/wordmark-480.webp">
+        <source type="image/avif" srcset="assets/img/brand/wordmark-800.avif">
+        <source type="image/webp" srcset="assets/img/brand/wordmark-800.webp">
+        <img src="assets/img/brand/wordmark-800.png" alt="Sunrisers Cricket Club, established 2017, New Jersey, USA" width="800" height="516" decoding="async">
+      </picture>
+    </h1>
+    <p class="lede">Three leagues, one 2026 season. Every match and every player, from CricClubs.</p>
     <div class="hero__actions">
       <a class="btn btn--sun" href="fixtures.html">Results</a>
+      <a class="link-arrow" href="teams.html">Squads</a>
       <a class="link-arrow" href="join.html">Join the team</a>
     </div>
   </div>
@@ -36,7 +50,7 @@ class: home
   </div>
 </section>
 
-<section class="band band--ink" aria-labelledby="club-title">
+<section class="band band--ink band--tex" aria-labelledby="club-title">
   <div class="wrap split">
     <h2 id="club-title" class="statement">One team. Three leagues. A season of cricket across New Jersey.</h2>
     <div class="prose reveal">

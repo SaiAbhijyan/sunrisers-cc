@@ -111,14 +111,21 @@
     });
   }
 
-  // ---- results: league selector (progressive: without JS every match is shown, grouped by league) ----
+  // ---- league selector, shared by the results page and the squads page ----
+  // Progressive: without JS the selector is hidden and every league is shown, grouped by league.
   const select = document.getElementById("league-select");
   if (select instanceof HTMLSelectElement) {
-    const groups = document.querySelectorAll(".league-group[data-league]");
+    const groups = document.querySelectorAll("[data-league]");
     const status = document.getElementById("filter-status");
     const known = new Set([...select.options].map((o) => o.value));
     const results = document.getElementById("league-results");
     const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const say = (key, shown) => {
+      if (!status) return;
+      const name = select.selectedOptions[0].textContent.replace(/\s*\(\d+ [a-z]+\)$/, "");
+      const tpl = key === "all" ? select.dataset.textAll : select.dataset.textOne;
+      if (tpl) status.textContent = tpl.replace("{n}", String(shown)).replace("{name}", name);
+    };
     let swap = 0;
     const apply = (key, updateUrl, animate) => {
       if (!known.has(key)) key = "all";
@@ -131,7 +138,7 @@
         }
       };
       groups.forEach((g) => {
-        if (key === "all" || g.dataset.league === key) shown += g.querySelectorAll(".scores > li").length;
+        if (key === "all" || g.dataset.league === key) shown += Number(g.dataset.total || 0);
       });
       clearTimeout(swap);
       if (animate && results && !calm) {
@@ -139,7 +146,7 @@
         swap = setTimeout(toggle, 150);
       } else toggle();
       select.value = key;
-      if (status) status.textContent = key === "all" ? `Showing all ${shown} matches, grouped by league.` : `Showing ${shown} matches in ${select.selectedOptions[0].textContent.replace(/\s*\(\d+ matches\)$/, "")}.`;
+      say(key, shown);
       if (updateUrl) {
         const url = new URL(location.href);
         if (key === "all") url.searchParams.delete("league");
@@ -147,9 +154,21 @@
         history.replaceState(null, "", url);
       }
     };
-    select.addEventListener("change", () => apply(select.value, true, true));
+    select.addEventListener("change", () => {
+      apply(select.value, true, true);
+      // keep the reader at the top of the list they just chose
+      if (results && results.getBoundingClientRect().top < 0) results.scrollIntoView({ block: "start", behavior: calm ? "auto" : "smooth" });
+    });
     window.addEventListener("popstate", () => apply(new URLSearchParams(location.search).get("league") || "all", false, true));
-    apply(new URLSearchParams(location.search).get("league") || "all", false, false);
+    // ?league=... wins; an old #team-... link to one squad opens that squad
+    let first = new URLSearchParams(location.search).get("league");
+    if (!first && location.hash) {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      const owner = target && target.closest("[data-league]");
+      if (owner) first = owner.dataset.league;
+    }
+    apply(first || "all", Boolean(first && !new URLSearchParams(location.search).get("league")), false);
+    if (first && location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
   }
 
   // ---- squad pages: sort the player cards (progressive: without JS the roster order stays) ----

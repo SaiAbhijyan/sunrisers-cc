@@ -1,8 +1,11 @@
 <header class="masthead">
   <div class="masthead__inner">
     <a class="brand" href="index.html" aria-label="Sunrisers New Jersey, home">
-      <!-- BRAND SLOT: replace assets/img/logo-slot.svg with the Sunrisers logo from Kittl -->
-      <img class="brand__logo" src="assets/img/logo-slot.svg" alt="" width="44" height="44">
+      <picture>
+        <source type="image/avif" srcset="assets/img/brand/phoenix-96.avif 1x, assets/img/brand/phoenix-192.avif 2x">
+        <source type="image/webp" srcset="assets/img/brand/phoenix-96.webp 1x, assets/img/brand/phoenix-192.webp 2x">
+        <img class="brand__logo" src="assets/img/brand/phoenix-96.png" srcset="assets/img/brand/phoenix-96.png 1x, assets/img/brand/phoenix-192.png 2x" alt="" width="96" height="93" decoding="async">
+      </picture>
       <span class="brand__name">Sunrisers<span class="brand__sub"> New Jersey</span></span>
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">

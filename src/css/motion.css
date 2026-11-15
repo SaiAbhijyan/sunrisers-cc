@@ -20,10 +20,13 @@
 
 /* ---------- results page: sticky selector bar + league swap ---------- */
 .filterbar { position: sticky; top: 4.5rem; z-index: 5; margin-inline: calc(-1 * var(--gutter)); padding: 0.75rem var(--gutter); background: var(--paper); border-bottom: 2px solid var(--ink); }
-.filterbar .filter { margin: 0; max-width: none; grid-template-columns: auto minmax(0, 24rem); align-items: center; gap: 0.25rem 1rem; }
+.filterbar .filter { margin: 0; max-width: none; grid-template-columns: max-content minmax(0, 24rem); justify-content: start; align-items: center; gap: 0.25rem 1rem; }
 .filterbar__status { margin: 0.4rem 0 0; }
 #league-results { transition: opacity 200ms var(--ease), translate 200ms var(--ease); }
 #league-results.is-out { opacity: 0; translate: 0 0.6rem; transition-duration: 140ms; }
+.filterbar.filterbar--squads { margin-inline: 0; padding: 0.75rem 0; background: var(--ink-2); color: var(--on-ink); border-bottom: 2px solid var(--sun); }
+.filterbar--squads .filter__select:focus-visible { outline-color: var(--focus); }
+.filterbar--squads .filterbar__status { color: var(--on-ink-dim); }
 @media (max-width: 599px) { .filterbar .filter { grid-template-columns: minmax(0, 1fr); } .filterbar__status { font-size: 0.85rem; } }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -43,26 +46,29 @@
 }
 
 /* ---------- native scroll-driven effects (Chrome, Edge, Safari 26+). Others get the static page. ---------- */
+/* load entrance: the wordmark settles in as the foil lights up, the phoenix tilts into place */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes sr-mark-in { from { opacity: 0; scale: 0.93; translate: 0 1.5rem; } to { opacity: 1; scale: 1; translate: 0 0; } }
+  @keyframes sr-shade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes sr-logo-in { from { opacity: 0; rotate: -12deg; scale: 0.75; } to { opacity: 1; rotate: 0deg; scale: 1; } }
+  .js .hero__mark { animation: sr-mark-in 1300ms var(--ease) 120ms both; }
+  .js .hero__shade { animation: sr-shade-in 1600ms ease-out both; }
+  .brand__logo { animation: sr-logo-in 900ms var(--ease) 100ms backwards; } /* backwards: the hover tilt must stay free to apply afterwards */
+}
+
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: scroll()) {
     @keyframes sr-progress { to { transform: scaleX(1); } }
     .progress { animation: sr-progress linear both; animation-timeline: scroll(root block); }
 
-    /* home hero: sun drifts up and grows, the slash bars rotate, the headline lifts and fades as you leave */
-    @keyframes sr-sun { to { translate: 0 -14%; scale: 1.1; } }
-    @keyframes sr-cut { to { rotate: -10deg; } }
-    @keyframes sr-lift { to { translate: 0 -5rem; opacity: 0.1; } }
-    @keyframes sr-sky { to { scale: 1.25; opacity: 0.55; } }
-    .js .hero .sun { animation: rise 1800ms var(--ease) 150ms both, sr-sun linear both; animation-timeline: auto, scroll(root block); animation-range: normal, 0 90svh; }
-    .sun__cut { animation: sr-cut linear both; animation-timeline: scroll(root block); animation-range: 0 90svh; }
-    .hero__inner { animation: sr-lift linear both; animation-timeline: scroll(root block); animation-range: 8svh 70svh; }
-    .hero__sky { animation: sr-sky linear both; animation-timeline: scroll(root block); animation-range: 0 100svh; transform-origin: 72% 100%; }
-    @media (max-width: 700px) {
-      .js .hero .sun { animation: rise-m 1500ms var(--ease) 150ms both, sr-sun linear both; animation-timeline: auto, scroll(root block); animation-range: normal, 0 90svh; }
-    }
+    /* home hero: the foil drifts and grows slowly, the wordmark lifts and fades as you leave */
+    @keyframes sr-tex { to { translate: 0 9%; scale: 1.1; } }
+    @keyframes sr-lift { to { translate: 0 -4rem; opacity: 0.1; scale: 0.96; } }
+    .hero__tex img { animation: sr-tex linear both; animation-timeline: scroll(root block); animation-range: 0 100svh; }
+    .hero__center { animation: sr-lift linear both; animation-timeline: scroll(root block); animation-range: 8svh 70svh; }
 
-    /* inner page hero: the sun slides down behind the headline */
-    @keyframes sr-psun { to { translate: -6% 22%; scale: 1.15; } }
+    /* inner page hero: the foil texture slides slowly behind the headline */
+    @keyframes sr-psun { to { translate: 0 9%; } }
     .phero::before { animation: sr-psun linear both; animation-timeline: scroll(root block); animation-range: 0 70svh; }
 
     /* big headings wipe in from the left as they enter the viewport */

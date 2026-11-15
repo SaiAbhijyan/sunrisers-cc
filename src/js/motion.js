@@ -20,6 +20,19 @@
     paint();
   }
 
+  // ---- 1b. hero foil parallax: only needed where native scroll-driven animation is missing ----
+  const tex = document.querySelector(".hero__tex img");
+  if (tex && !supports("animation-timeline: scroll()")) {
+    let queued = false;
+    const paint = () => {
+      queued = false;
+      const p = Math.min(1, window.scrollY / window.innerHeight);
+      tex.style.translate = `0 ${(p * 9).toFixed(2)}%`;
+      tex.style.scale = String(1 + p * 0.1);
+    };
+    window.addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(paint); } }, { passive: true });
+  }
+
   // ---- 2. reveals ----
   const SELECTORS = [
     ".reveal", ".scores > li", ".teamlist__item", ".stats__cell", ".roster li", ".news-card", ".sponsor-slot",
@@ -52,13 +65,19 @@
     { rootMargin: "0px 0px -6% 0px", threshold: 0.06 }
   );
 
-  const arm = (el) => {
-    if (el.closest("[hidden]") || el.classList.contains("is-in")) return;
-    el.classList.add("reveal", "is-arming");
-    void el.offsetWidth; // commit the hidden state without a transition
-    el.classList.remove("is-arming");
-    pending.add(el);
-    reveal.observe(el);
+  // Arm many elements at once: all class writes together, observers on the next frame.
+  // (A forced reflow per element made the 74-card squads page do 74 layouts.)
+  const armMany = (els) => {
+    const list = els.filter((el) => !el.closest("[hidden]") && !el.classList.contains("is-in"));
+    list.forEach((el) => el.classList.add("reveal", "is-arming"));
+    // commit the hidden state without a transition, on the next frame (no synchronous reflow)
+    requestAnimationFrame(() => {
+      list.forEach((el) => {
+        el.classList.remove("is-arming");
+        pending.add(el);
+        reveal.observe(el);
+      });
+    });
   };
 
   // A fast flick can carry an element from below the screen to above it between two frames, so the
@@ -81,24 +100,20 @@
   }, { passive: true });
 
   const armAll = (root) => {
-    const seen = new Set();
-    root.querySelectorAll(SELECTORS.join(",")).forEach((el) => {
-      if (seen.has(el)) return;
-      seen.add(el);
-      // anything already in the first screen stays as painted: no hide-then-show flash
-      if (root === document && el.getBoundingClientRect().top < window.innerHeight * 0.92 && !el.classList.contains("reveal")) return;
-      arm(el);
-    });
+    const found = [...new Set(root.querySelectorAll(SELECTORS.join(",")))];
+    // reads first: anything already in the first screen stays as painted (no hide-then-show flash)
+    const limit = window.innerHeight * 0.92;
+    const todo = found.filter((el) => !(root === document && !el.classList.contains("reveal") && el.getBoundingClientRect().top < limit));
+    armMany(todo);
   };
   armAll(document);
 
   // the league selector shows another set of groups: replay the entrance for the cards now on screen
   document.addEventListener("sr:refresh", (e) => {
     const root = e.target instanceof Element ? e.target : document;
-    root.querySelectorAll(".league-group:not([hidden]) .scores > li, .league-group:not([hidden]) .league-group__h").forEach((el) => {
-      el.classList.remove("reveal", "is-in");
-      arm(el);
-    });
+    const els = [...root.querySelectorAll("[data-league]:not([hidden]) :is(.scores > li, .league-group__h, .pcard, .leaders__cell, .stats__cell)")];
+    els.forEach((el) => el.classList.remove("reveal", "is-in"));
+    armMany(els);
   });
 
   // ---- 3. count-up numbers (final value is always in the text; the animation only starts from 0 in view) ----

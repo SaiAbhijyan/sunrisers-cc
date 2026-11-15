@@ -1,5 +1,5 @@
-/* Hallmark · shape: scoreboard-and-sunrise sport site · genre: playful (custom, sport) · theme: custom "First Light" · job: join · idea: "the day starts when the sun clears the boundary rope" · vibe: "orange sun on black, loud condensed type, scoreboard precision"
- * paper: oklch(14% 0.012 55) · accent: oklch(68% 0.205 47) · display: Big Shoulders Display · body: Hanken Grotesk · hero: Settled, left-aligned stacked headline over a sun rising behind a horizon line · nav: black bar, wordmark left, links, orange Join · footer: oversized wordmark and the site map
+/* Hallmark · shape: scoreboard-and-sunrise sport site · genre: playful (custom, sport) · theme: custom "First Light" (retuned to the supplied brand red-orange) · job: join · idea: "the day starts when the sun clears the boundary rope" · vibe: "orange sun on black, loud condensed type, scoreboard precision"
+ * paper: oklch(14% 0.014 35) · accent: oklch(64% 0.205 36) · display: Big Shoulders Display · body: Hanken Grotesk · hero: Settled, centred supplied wordmark with a soft glow over the full-bleed red-orange crinkled foil texture · nav: black bar, wordmark left, links, orange Join · footer: oversized wordmark and the site map
  * surface: committed orange bands are declared surface colour (posture: Committed) · contrast: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: no photography exists yet, so type, sun and scorecards carry the weight; photo slots are built so real club photos drop in */
 
@@ -14,20 +14,34 @@
    ========================================================== */
 :root {
   /* BRAND SLOT 1: colours (replace with club/Kittl palette) */
-  --ink: oklch(14% 0.012 55);          /* black ground */
-  --ink-2: oklch(19% 0.014 55);        /* raised black */
-  --ink-3: oklch(26% 0.016 55);        /* lines on black */
-  --sun: oklch(68% 0.205 47);          /* primary orange */
-  --sun-deep: oklch(58% 0.2 40);       /* pressed / shade */
-  --flare: oklch(84% 0.15 80);         /* amber highlight, sparing */
+  /* Sampled from Sai's home reference (brand-src/home-reference.png): the foil highlights are #c83203 to #e0430c,
+     oklch hue 35. The black is the reference's red-tinted black. --sun is the lightest step of that red-orange that
+     still gives 5.4:1 against both the black ground and black text (AA); --sun-deep is the same hue darkened to
+     5.4:1 on the warm paper; they are the only two accent steps (text on dark uses --sun, text on paper --sun-deep). */
+  --ink: oklch(14% 0.014 35);          /* black ground, red-tinted like the reference */
+  --ink-2: oklch(19% 0.02 35);         /* raised black */
+  --ink-3: oklch(27% 0.03 35);         /* lines on black */
+  --sun: oklch(64% 0.205 36);          /* primary red-orange (#f04a12) */
+  --sun-deep: oklch(52% 0.19 35);      /* pressed / shade, and orange text on paper (#c12100) */
+  --flare: oklch(82% 0.14 62);         /* amber highlight, sparing */
   --paper: oklch(96% 0.012 80);        /* warm light ground */
   --paper-2: oklch(91% 0.018 75);
   --on-ink: oklch(96% 0.01 80);        /* text on black */
   --on-ink-dim: oklch(78% 0.02 70);    /* secondary text on black, 7:1+ */
-  --on-sun: oklch(14% 0.012 55);       /* text on orange */
+  --on-sun: oklch(14% 0.014 35);       /* text on orange */
   --on-paper: oklch(18% 0.014 55);
   --on-paper-dim: oklch(40% 0.02 55);
-  --focus: oklch(84% 0.15 80);
+  --focus: oklch(84% 0.14 70);
+  /* translucent scrims over the texture, all derived from --ink / --sun / --on-ink */
+  --veil-90: color-mix(in oklab, var(--ink) 90%, transparent);
+  --veil-84: color-mix(in oklab, var(--ink) 84%, transparent);
+  --veil-74: color-mix(in oklab, var(--ink) 74%, transparent);
+  --veil-60: color-mix(in oklab, var(--ink) 60%, transparent);
+  --veil-55: color-mix(in oklab, var(--ink) 55%, transparent);
+  --veil-50: color-mix(in oklab, var(--ink) 50%, transparent);
+  --veil-15: color-mix(in oklab, var(--ink) 15%, transparent);
+  --glow-white: color-mix(in oklab, var(--on-ink) 50%, transparent);
+  --glow-sun: color-mix(in oklab, var(--sun) 55%, transparent);
   --danger: oklch(72% 0.17 25);
   --danger-on-paper: oklch(48% 0.19 27);
   --ok: oklch(80% 0.15 150);
@@ -36,7 +50,7 @@
   --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
   --font-body: "Hanken Grotesk", system-ui, sans-serif;
 
-  /* BRAND SLOT 3: logo is assets/img/logo-slot.svg (see header partial) */
+  /* BRAND: logo and wordmark are the supplied phoenix and wordmark images in assets/img/brand (tools/build-brand.py) */
 
   /* layout and rhythm (not brand) */
   --maxw: 1320px;
