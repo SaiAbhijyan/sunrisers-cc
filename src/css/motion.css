@@ -1,0 +1,89 @@
+/* ==========================================================
+   MOTION LAYER. Everything here is progressive enhancement:
+   - content is fully visible with no JS and with no scroll-driven support;
+   - only transform/translate/rotate/opacity/clip-path move, so layout never shifts;
+   - nothing runs under prefers-reduced-motion: reduce.
+   Scroll-driven effects use native CSS (animation-timeline) so there is no scroll listener and no library.
+   Reveals, count-ups and the league swap live in js/motion.js and js/main.js.
+   ========================================================== */
+
+/* ---------- always-on, tiny: press and hover feedback ---------- */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--sun); transform-origin: left center; transform: scaleX(0); pointer-events: none; }
+.score::before { transform-origin: left center; transition: transform 220ms var(--ease), background-color 220ms; }
+.score:hover::before, .score:focus-within::before { transform: scaleX(2); background: var(--sun); }
+.score--win:hover::before, .score--win:focus-within::before { background: var(--flare); }
+.score:active { transform: translateX(2px) scale(0.995); }
+.teamlist__link:active { opacity: 0.85; }
+.link-arrow:active { translate: 0 1px; }
+.btn:active { transform: translateY(1px) scale(0.97); }
+.filter__select:active { translate: 0 1px; }
+
+/* ---------- results page: sticky selector bar + league swap ---------- */
+.filterbar { position: sticky; top: 4.5rem; z-index: 5; margin-inline: calc(-1 * var(--gutter)); padding: 0.75rem var(--gutter); background: var(--paper); border-bottom: 2px solid var(--ink); }
+.filterbar .filter { margin: 0; max-width: none; grid-template-columns: auto minmax(0, 24rem); align-items: center; gap: 0.25rem 1rem; }
+.filterbar__status { margin: 0.4rem 0 0; }
+#league-results { transition: opacity 200ms var(--ease), translate 200ms var(--ease); }
+#league-results.is-out { opacity: 0; translate: 0 0.6rem; transition-duration: 140ms; }
+@media (max-width: 599px) { .filterbar .filter { grid-template-columns: minmax(0, 1fr); } .filterbar__status { font-size: 0.85rem; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; scroll-padding-top: 9rem; }
+
+  /* cross-page navigation: the masthead stays put, the page behind it fades through */
+  @view-transition { navigation: auto; }
+  .masthead { view-transition-name: masthead; }
+  ::view-transition-old(root) { animation: 180ms var(--ease) both sr-fade-out; }
+  ::view-transition-new(root) { animation: 320ms var(--ease) both sr-fade-in; }
+  @keyframes sr-fade-out { to { opacity: 0; } }
+  @keyframes sr-fade-in { from { opacity: 0; } }
+
+  /* league swap entrance for cards is handled by .reveal re-arming (motion.js) */
+  .scores > li.reveal::before { scale: 1 0; transform-origin: top; transition: scale 600ms var(--ease) calc(var(--d, 0ms) + 120ms); }
+  .scores > li.reveal.is-in::before { scale: 1 1; }
+}
+
+/* ---------- native scroll-driven effects (Chrome, Edge, Safari 26+). Others get the static page. ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    @keyframes sr-progress { to { transform: scaleX(1); } }
+    .progress { animation: sr-progress linear both; animation-timeline: scroll(root block); }
+
+    /* home hero: sun drifts up and grows, the slash bars rotate, the headline lifts and fades as you leave */
+    @keyframes sr-sun { to { translate: 0 -14%; scale: 1.1; } }
+    @keyframes sr-cut { to { rotate: -10deg; } }
+    @keyframes sr-lift { to { translate: 0 -5rem; opacity: 0.1; } }
+    @keyframes sr-sky { to { scale: 1.25; opacity: 0.55; } }
+    .js .hero .sun { animation: rise 1800ms var(--ease) 150ms both, sr-sun linear both; animation-timeline: auto, scroll(root block); animation-range: normal, 0 90svh; }
+    .sun__cut { animation: sr-cut linear both; animation-timeline: scroll(root block); animation-range: 0 90svh; }
+    .hero__inner { animation: sr-lift linear both; animation-timeline: scroll(root block); animation-range: 8svh 70svh; }
+    .hero__sky { animation: sr-sky linear both; animation-timeline: scroll(root block); animation-range: 0 100svh; transform-origin: 72% 100%; }
+    @media (max-width: 700px) {
+      .js .hero .sun { animation: rise-m 1500ms var(--ease) 150ms both, sr-sun linear both; animation-timeline: auto, scroll(root block); animation-range: normal, 0 90svh; }
+    }
+
+    /* inner page hero: the sun slides down behind the headline */
+    @keyframes sr-psun { to { translate: -6% 22%; scale: 1.15; } }
+    .phero::before { animation: sr-psun linear both; animation-timeline: scroll(root block); animation-range: 0 70svh; }
+
+    /* big headings wipe in from the left as they enter the viewport */
+    @keyframes sr-wipe { from { clip-path: inset(0 100% 0 0); translate: -3vw 0; } to { clip-path: inset(0 0 0 0); translate: 0 0; } }
+    .display-l, .display-m, .statement { animation: sr-wipe linear both; animation-timeline: view(); animation-range: entry 5% entry 75%; }
+    /* the page headline on inner pages is covered by its own load animation */
+    .phero h1 { animation-timeline: auto; }
+
+    /* ticker band slides sideways with the page */
+    @keyframes sr-tick { from { translate: 9% 0; } to { translate: -9% 0; } }
+    .marquee__track { animation: sr-tick linear both; animation-timeline: view(); animation-range: cover; }
+
+    /* footer wordmark slides in */
+    @keyframes sr-word { from { translate: 14% 0; } to { translate: 0 0; } }
+    .foot .foot__word { animation: sr-word linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
+
+    /* big stat numbers, slash edges and the sun band stripes parallax a little */
+    @keyframes sr-edge { from { translate: 0 6%; } to { translate: 0 -6%; } }
+    .band--sun::after { animation: sr-edge linear both; animation-timeline: view(); animation-range: cover; }
+  }
+}
+
+/* arming a reveal must not animate the hide itself */
+.js .reveal.is-arming, .js .scores > li.reveal.is-arming::before { transition: none; }

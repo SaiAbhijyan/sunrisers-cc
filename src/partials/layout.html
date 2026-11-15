@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US" data-type="place">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="{{csp}}">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="theme-color" content="#14100d">
+<meta name="color-scheme" content="dark light">
+{{robots}}
+{{canonical}}
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/img/logo-slot.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+<script src="js/early.js"></script>
+</head>
+<body class="{{bodyclass}}">
+<a class="skip" href="#main">Skip to content</a>
+{{header}}
+<main id="main" tabindex="-1">
+{{content}}
+</main>
+{{footer}}
+<script src="js/main.js" defer></script>
+<script src="js/motion.js" defer></script>
+</body>
+</html>

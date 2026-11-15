@@ -1,0 +1,48 @@
+/* Hallmark · shape: scoreboard-and-sunrise sport site · genre: playful (custom, sport) · theme: custom "First Light" · job: join · idea: "the day starts when the sun clears the boundary rope" · vibe: "orange sun on black, loud condensed type, scoreboard precision"
+ * paper: oklch(14% 0.012 55) · accent: oklch(68% 0.205 47) · display: Big Shoulders Display · body: Hanken Grotesk · hero: Settled, left-aligned stacked headline over a sun rising behind a horizon line · nav: black bar, wordmark left, links, orange Join · footer: oversized wordmark and the site map
+ * surface: committed orange bands are declared surface colour (posture: Committed) · contrast: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: no photography exists yet, so type, sun and scorecards carry the weight; photo slots are built so real club photos drop in */
+
+/* Hallmark · waive 81 · the data-slot frames are labelled stand-ins for club photography and the sun is a built CSS illustration · the brief supplies no photographs and none may be invented, so each slot says what belongs in it */
+/* Hallmark · waive 59 · the 14px gap is the orange marquee strip under the hero, a divider by design · the page separates with colour bands and rules, not whitespace alone */
+/* Hallmark · waive 79 · the gap under each hero is the sun clearing the horizon behind it · it is the hero's one idea and carries a decorative illustration */
+
+/* ==========================================================
+   THEME TOKENS: the only place colours and fonts are declared.
+   Swap everything below when Sai's Kittl references arrive.
+   See docs/BRAND-SLOTS.md.
+   ========================================================== */
+:root {
+  /* BRAND SLOT 1: colours (replace with club/Kittl palette) */
+  --ink: oklch(14% 0.012 55);          /* black ground */
+  --ink-2: oklch(19% 0.014 55);        /* raised black */
+  --ink-3: oklch(26% 0.016 55);        /* lines on black */
+  --sun: oklch(68% 0.205 47);          /* primary orange */
+  --sun-deep: oklch(58% 0.2 40);       /* pressed / shade */
+  --flare: oklch(84% 0.15 80);         /* amber highlight, sparing */
+  --paper: oklch(96% 0.012 80);        /* warm light ground */
+  --paper-2: oklch(91% 0.018 75);
+  --on-ink: oklch(96% 0.01 80);        /* text on black */
+  --on-ink-dim: oklch(78% 0.02 70);    /* secondary text on black, 7:1+ */
+  --on-sun: oklch(14% 0.012 55);       /* text on orange */
+  --on-paper: oklch(18% 0.014 55);
+  --on-paper-dim: oklch(40% 0.02 55);
+  --focus: oklch(84% 0.15 80);
+  --danger: oklch(72% 0.17 25);
+  --danger-on-paper: oklch(48% 0.19 27);
+  --ok: oklch(80% 0.15 150);
+
+  /* BRAND SLOT 2: fonts (self-hosted in assets/fonts) */
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, sans-serif;
+
+  /* BRAND SLOT 3: logo is assets/img/logo-slot.svg (see header partial) */
+
+  /* layout and rhythm (not brand) */
+  --maxw: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --radius: 4px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --slash: 14deg;
+  --colgap: clamp(2rem, 5vw, 4.5rem);
+}

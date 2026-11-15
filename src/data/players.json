@@ -1,0 +1,2329 @@
+{
+ "_source": "research/player-stats/*.html, CricClubs, saved 2026-11-14. Blank source cells are absent.",
+ "teams": {
+  "907": [
+   {
+    "id": "4278428",
+    "name": "Abhimanyu Bhardwaj",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=4278428&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "1",
+     "Runs": "7",
+     "HS": "4",
+     "Avg": "7.00",
+     "SR": "70.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "10.3",
+     "M": "0",
+     "R": "106",
+     "W": "2",
+     "Best": "22/1",
+     "Econ": "10.10",
+     "Avg": "53.00",
+     "SR": "31.5"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1634451",
+    "name": "Andrew V",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=1634451&clubId=49"
+   },
+   {
+    "id": "3320057",
+    "name": "Anil Vellaturi",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=3320057&clubId=49",
+    "batting": {
+     "M": "2",
+     "Inns": "1",
+     "NO": "0",
+     "Runs": "10",
+     "HS": "10",
+     "Avg": "10.00",
+     "SR": "142.86",
+     "4s": "2",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "4",
+     "M": "0",
+     "R": "46",
+     "W": "0",
+     "Best": "16/0",
+     "Econ": "11.50",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "5128553",
+    "name": "Aslam Uddin",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Leg Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=5128553&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "256213",
+    "name": "Deepak Kaintura",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=256213&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "638073",
+    "name": "Deepak Kaintura",
+    "role": "Wicket Keeper",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "WK"
+    ],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=638073&clubId=49"
+   },
+   {
+    "id": "4567376",
+    "name": "Dharmateja Vedantam",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=4567376&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "1",
+     "NO": "1",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "2",
+     "M": "0",
+     "R": "22",
+     "W": "1",
+     "Best": "22/1",
+     "Econ": "11.00",
+     "Avg": "22.00",
+     "SR": "12.0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "768129",
+    "name": "Hari Gangula",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "VC"
+    ],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=768129&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "9",
+     "HS": "7",
+     "Avg": "4.50",
+     "SR": "75.00",
+     "4s": "0",
+     "6s": "1",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4265283",
+    "name": "Krishna Sai Reddy",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Middle Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=4265283&clubId=49"
+   },
+   {
+    "id": "1266512",
+    "name": "Krishnateja Vedantam",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=1266512&clubId=49",
+    "batting": {
+     "M": "2",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "21",
+     "HS": "19",
+     "Avg": "10.50",
+     "SR": "123.53",
+     "4s": "1",
+     "6s": "1",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1806348",
+    "name": "Maanas Lalwani",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Middle Order)",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=1806348&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "3",
+     "NO": "1",
+     "Runs": "37",
+     "HS": "18",
+     "Avg": "18.50",
+     "SR": "92.50",
+     "4s": "2",
+     "6s": "2",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "12",
+     "M": "0",
+     "R": "93",
+     "W": "6",
+     "Best": "38/3",
+     "Econ": "7.75",
+     "Avg": "15.50",
+     "SR": "12.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "3358240",
+    "name": "Narendra Mukkamala",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=3358240&clubId=49",
+    "batting": {
+     "M": "4",
+     "Inns": "4",
+     "NO": "0",
+     "Runs": "50",
+     "HS": "20",
+     "Avg": "12.50",
+     "SR": "96.15",
+     "4s": "4",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1225866",
+    "name": "Rahul Bandaru",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=1225866&clubId=49"
+   },
+   {
+    "id": "1493960",
+    "name": "Raman Seem",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=1493960&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2629398",
+    "name": "Ravikumar Kv",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=2629398&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "0.00",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "9.4",
+     "M": "0",
+     "R": "101",
+     "W": "8",
+     "Best": "24/5",
+     "Econ": "10.45",
+     "Avg": "12.62",
+     "SR": "7.2"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2634432",
+    "name": "Revanth Yarlagadda",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=2634432&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2032091",
+    "name": "Ronald Rexson",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "C"
+    ],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=2032091&clubId=49",
+    "batting": {
+     "M": "5",
+     "Inns": "4",
+     "NO": "0",
+     "Runs": "24",
+     "HS": "12",
+     "Avg": "6.00",
+     "SR": "72.73",
+     "4s": "1",
+     "6s": "2",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "5",
+     "M": "0",
+     "R": "52",
+     "W": "2",
+     "Best": "2/1",
+     "Econ": "10.40",
+     "Avg": "26.00",
+     "SR": "15.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4561595",
+    "name": "Rupam Rai",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=4561595&clubId=49",
+    "batting": {
+     "M": "5",
+     "Inns": "4",
+     "NO": "0",
+     "Runs": "51",
+     "HS": "44",
+     "Avg": "12.75",
+     "SR": "115.91",
+     "4s": "6",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "2",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "1"
+    }
+   },
+   {
+    "id": "4310248",
+    "name": "Sai Abhijyan Tanikella",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=4310248&clubId=49",
+    "batting": {
+     "M": "4",
+     "Inns": "4",
+     "NO": "2",
+     "Runs": "37",
+     "HS": "32",
+     "Avg": "18.50",
+     "SR": "90.24",
+     "4s": "1",
+     "6s": "1",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "6",
+     "M": "0",
+     "R": "46",
+     "W": "5",
+     "Best": "28/3",
+     "Econ": "7.67",
+     "Avg": "9.20",
+     "SR": "7.2"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "2",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1202976",
+    "name": "Santosh Konchada",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=1202976&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "14",
+     "HS": "14",
+     "Avg": "7.00",
+     "SR": "155.56",
+     "4s": "0",
+     "6s": "2",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "8",
+     "M": "0",
+     "R": "59",
+     "W": "0",
+     "Best": "0/0",
+     "Econ": "7.38",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2546545",
+    "name": "Santosh Yvs",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=2546545&clubId=49"
+   },
+   {
+    "id": "767922",
+    "name": "Sehul Patel",
+    "role": "All Rounder",
+    "batStyle": "Left Hand Batter (Top Order)",
+    "bowlStyle": "Left Arm Orthodox",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=767922&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "3",
+     "NO": "0",
+     "Runs": "70",
+     "HS": "48",
+     "Avg": "23.33",
+     "SR": "127.27",
+     "4s": "4",
+     "6s": "2",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "1",
+     "M": "0",
+     "R": "5",
+     "W": "1",
+     "Best": "5/1",
+     "Econ": "5.00",
+     "Avg": "5.00",
+     "SR": "6.0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4557279",
+    "name": "Shailesh Patel",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Leg Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=4557279&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "6245906",
+    "name": "Siddartha Y",
+    "role": "Bowler",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=6245906&clubId=49"
+   },
+   {
+    "id": "5109142",
+    "name": "Siddartha Reddy Y",
+    "role": "Bowler",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Fast",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=5109142&clubId=49",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "1",
+     "Runs": "6",
+     "HS": "6",
+     "Avg": "6.00",
+     "SR": "33.33",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "7",
+     "M": "0",
+     "R": "66",
+     "W": "2",
+     "Best": "9/1",
+     "Econ": "9.43",
+     "Avg": "33.00",
+     "SR": "21.0"
+    },
+    "fielding": {
+     "Ct": "4",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "294056",
+    "name": "Suresh Yenamandra",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Middle Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=294056&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "1",
+     "NO": "0",
+     "Runs": "5",
+     "HS": "5",
+     "Avg": "5.00",
+     "SR": "38.46",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "4",
+     "M": "0",
+     "R": "31",
+     "W": "1",
+     "Best": "31/1",
+     "Econ": "7.75",
+     "Avg": "31.00",
+     "SR": "24.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "5343483",
+    "name": "Varun Katari",
+    "role": "Batter",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=5343483&clubId=49"
+   },
+   {
+    "id": "362348",
+    "name": "Varun Mathukumalli",
+    "role": "Batter",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=362348&clubId=49",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "3696931",
+    "name": "Venkat Chennamallu",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/CLNJ/viewPlayer.do?playerId=3696931&clubId=49",
+    "batting": {
+     "M": "5",
+     "Inns": "4",
+     "NO": "0",
+     "Runs": "114",
+     "HS": "50",
+     "Avg": "28.50",
+     "SR": "131.03",
+     "4s": "10",
+     "6s": "6",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "10",
+     "M": "0",
+     "R": "82",
+     "W": "1",
+     "Best": "28/1",
+     "Econ": "8.20",
+     "Avg": "82.00",
+     "SR": "60.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   }
+  ],
+  "1974": [
+   {
+    "id": "3348327",
+    "name": "Anil Vellaturi",
+    "role": "Null",
+    "batStyle": "",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=3348327&clubId=21870",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "2",
+     "Runs": "3",
+     "HS": "3",
+     "Avg": "--",
+     "SR": "42.86",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "10",
+     "M": "0",
+     "R": "71",
+     "W": "6",
+     "Best": "27/4",
+     "Econ": "7.10",
+     "Avg": "11.83",
+     "SR": "10.0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "5128553",
+    "name": "Aslam Uddin",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Leg Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=5128553&clubId=21870",
+    "batting": {
+     "M": "3",
+     "Inns": "1",
+     "NO": "0",
+     "Runs": "8",
+     "HS": "8",
+     "Avg": "8.00",
+     "SR": "80.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "12",
+     "M": "0",
+     "R": "83",
+     "W": "6",
+     "Best": "17/2",
+     "Econ": "6.92",
+     "Avg": "13.83",
+     "SR": "12.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "638073",
+    "name": "Deepak Kaintura",
+    "role": "Wicket Keeper",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "WK"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=638073&clubId=21870",
+    "batting": {
+     "M": "5",
+     "Inns": "4",
+     "NO": "0",
+     "Runs": "44",
+     "HS": "29",
+     "Avg": "11.00",
+     "SR": "73.33",
+     "4s": "5",
+     "6s": "0",
+     "50s": "1",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "9",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "1"
+    }
+   },
+   {
+    "id": "3359637",
+    "name": "Dharmateja Vedantam",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=3359637&clubId=21870",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "0.3",
+     "M": "0",
+     "R": "10",
+     "W": "0",
+     "Best": "10/0",
+     "Econ": "20.00",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "479553",
+    "name": "Dinesh Rajendran",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=479553&clubId=21870",
+    "batting": {
+     "M": "4",
+     "Inns": "4",
+     "NO": "1",
+     "Runs": "80",
+     "HS": "52",
+     "Avg": "26.67",
+     "SR": "103.90",
+     "4s": "8",
+     "6s": "2",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "768129",
+    "name": "Hari Gangula",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "VC"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=768129&clubId=21870",
+    "batting": {
+     "M": "4",
+     "Inns": "4",
+     "NO": "1",
+     "Runs": "58",
+     "HS": "28",
+     "Avg": "19.33",
+     "SR": "82.86",
+     "4s": "2",
+     "6s": "2",
+     "50s": "1",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "4",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2032095",
+    "name": "Harsh Patel",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2032095&clubId=21870"
+   },
+   {
+    "id": "1266512",
+    "name": "Krishnateja Vedantam",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1266512&clubId=21870",
+    "batting": {
+     "M": "2",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "14",
+     "HS": "11",
+     "Avg": "7.00",
+     "SR": "116.67",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "5",
+     "M": "0",
+     "R": "36",
+     "W": "4",
+     "Best": "21/4",
+     "Econ": "7.20",
+     "Avg": "9.00",
+     "SR": "7.5"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1785426",
+    "name": "Madhur Katyal",
+    "role": "Wicket Keeper",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "WK"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1785426&clubId=21870",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "19",
+     "HS": "13",
+     "Avg": "9.50",
+     "SR": "105.56",
+     "4s": "1",
+     "6s": "1",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "4",
+     "M": "0",
+     "R": "35",
+     "W": "1",
+     "Best": "20/1",
+     "Econ": "8.75",
+     "Avg": "35.00",
+     "SR": "24.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "3386513",
+    "name": "Nutan Kunchapu",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=3386513&clubId=21870"
+   },
+   {
+    "id": "1493960",
+    "name": "Raman Seem",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1493960&clubId=21870",
+    "batting": {
+     "M": "4",
+     "Inns": "3",
+     "NO": "1",
+     "Runs": "5",
+     "HS": "3",
+     "Avg": "2.50",
+     "SR": "71.43",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "11",
+     "M": "0",
+     "R": "82",
+     "W": "4",
+     "Best": "26/2",
+     "Econ": "7.45",
+     "Avg": "20.50",
+     "SR": "16.5"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2241695",
+    "name": "Ramji Seetharaman",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2241695&clubId=21870"
+   },
+   {
+    "id": "2629398",
+    "name": "Ravikumar Kv",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2629398&clubId=21870",
+    "batting": {
+     "M": "4",
+     "Inns": "2",
+     "NO": "1",
+     "Runs": "10",
+     "HS": "6",
+     "Avg": "10.00",
+     "SR": "100.00",
+     "4s": "1",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "13.5",
+     "M": "0",
+     "R": "100",
+     "W": "5",
+     "Best": "23/2",
+     "Econ": "7.23",
+     "Avg": "20.00",
+     "SR": "16.6"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1741177",
+    "name": "Revanth Yarlagadda",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1741177&clubId=21870",
+    "batting": {
+     "M": "4",
+     "Inns": "3",
+     "NO": "0",
+     "Runs": "46",
+     "HS": "28",
+     "Avg": "15.33",
+     "SR": "95.83",
+     "4s": "3",
+     "6s": "2",
+     "50s": "1",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2032091",
+    "name": "Ronald Rexson",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "C"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2032091&clubId=21870",
+    "batting": {
+     "M": "5",
+     "Inns": "3",
+     "NO": "0",
+     "Runs": "116",
+     "HS": "69",
+     "Avg": "38.67",
+     "SR": "203.51",
+     "4s": "3",
+     "6s": "12",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "6",
+     "M": "0",
+     "R": "28",
+     "W": "3",
+     "Best": "20/2",
+     "Econ": "4.67",
+     "Avg": "9.33",
+     "SR": "12.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4561595",
+    "name": "Rupam Rai",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4561595&clubId=21870",
+    "batting": {
+     "M": "5",
+     "Inns": "3",
+     "NO": "1",
+     "Runs": "80",
+     "HS": "50",
+     "Avg": "40.00",
+     "SR": "105.26",
+     "4s": "3",
+     "6s": "3",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "1",
+     "M": "0",
+     "R": "7",
+     "W": "0",
+     "Best": "0/0",
+     "Econ": "7.00",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "1",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4310248",
+    "name": "Sai Abhijyan Tanikella",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4310248&clubId=21870",
+    "batting": {
+     "M": "5",
+     "Inns": "4",
+     "NO": "1",
+     "Runs": "45",
+     "HS": "15",
+     "Avg": "15.00",
+     "SR": "121.62",
+     "4s": "2",
+     "6s": "3",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "12.4",
+     "M": "0",
+     "R": "71",
+     "W": "6",
+     "Best": "31/3",
+     "Econ": "5.61",
+     "Avg": "11.83",
+     "SR": "12.7"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1202976",
+    "name": "Santosh Konchada",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1202976&clubId=21870",
+    "batting": {
+     "M": "2",
+     "Inns": "1",
+     "NO": "1",
+     "Runs": "2",
+     "HS": "2",
+     "Avg": "--",
+     "SR": "66.67",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "8",
+     "M": "0",
+     "R": "24",
+     "W": "2",
+     "Best": "13/2",
+     "Econ": "3.00",
+     "Avg": "12.00",
+     "SR": "24.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "6871812",
+    "name": "Satwik Majumder",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Middle Order)",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=6871812&clubId=21870"
+   },
+   {
+    "id": "767922",
+    "name": "Sehul Patel",
+    "role": "All Rounder",
+    "batStyle": "Left Hand Batter (Top Order)",
+    "bowlStyle": "Left Arm Orthodox",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=767922&clubId=21870",
+    "batting": {
+     "M": "1",
+     "Inns": "1",
+     "NO": "0",
+     "Runs": "16",
+     "HS": "16",
+     "Avg": "16.00",
+     "SR": "80.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4557279",
+    "name": "Shailesh Patel",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Leg Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4557279&clubId=21870",
+    "batting": {
+     "M": "1",
+     "Inns": "0",
+     "NO": "0",
+     "Runs": "0",
+     "HS": "0",
+     "Avg": "--",
+     "SR": "0.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "3",
+     "M": "0",
+     "R": "28",
+     "W": "1",
+     "Best": "28/1",
+     "Econ": "9.33",
+     "Avg": "28.00",
+     "SR": "18.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "1",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "5050825",
+    "name": "Siddartha Reddy Yalluri",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=5050825&clubId=21870",
+    "batting": {
+     "M": "3",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "3",
+     "HS": "3",
+     "Avg": "1.50",
+     "SR": "60.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "11",
+     "M": "0",
+     "R": "79",
+     "W": "1",
+     "Best": "22/1",
+     "Econ": "7.18",
+     "Avg": "79.00",
+     "SR": "66.0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "294056",
+    "name": "Suresh Yenamandra",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Middle Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=294056&clubId=21870",
+    "batting": {
+     "M": "2",
+     "Inns": "1",
+     "NO": "0",
+     "Runs": "2",
+     "HS": "2",
+     "Avg": "2.00",
+     "SR": "40.00",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "6",
+     "M": "0",
+     "R": "37",
+     "W": "3",
+     "Best": "14/3",
+     "Econ": "6.17",
+     "Avg": "12.33",
+     "SR": "12.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "1",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "362348",
+    "name": "Varun Mathukumalli",
+    "role": "Batter",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=362348&clubId=21870"
+   },
+   {
+    "id": "2638953",
+    "name": "Venkat Sai",
+    "role": "All Rounder",
+    "batStyle": "Left Handed Batter",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2638953&clubId=21870",
+    "batting": {
+     "M": "5",
+     "Inns": "5",
+     "NO": "0",
+     "Runs": "189",
+     "HS": "70",
+     "Avg": "37.80",
+     "SR": "187.13",
+     "4s": "14",
+     "6s": "15",
+     "50s": "2",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "5.5",
+     "M": "0",
+     "R": "40",
+     "W": "0",
+     "Best": "0/0",
+     "Econ": "6.86",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "4",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   }
+  ],
+  "1950": [
+   {
+    "id": "1426016",
+    "name": "Ananta Gaikwad",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1426016&clubId=21870"
+   },
+   {
+    "id": "638073",
+    "name": "Deepak Kaintura",
+    "role": "Wicket Keeper",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "WK"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=638073&clubId=21870",
+    "batting": {
+     "M": "13",
+     "Inns": "13",
+     "NO": "0",
+     "Runs": "354",
+     "HS": "77",
+     "Avg": "27.23",
+     "SR": "112.38",
+     "4s": "40",
+     "6s": "11",
+     "50s": "3",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "14",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "1"
+    }
+   },
+   {
+    "id": "3359637",
+    "name": "Dharmateja Vedantam",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=3359637&clubId=21870",
+    "batting": {
+     "M": "5",
+     "Inns": "1",
+     "NO": "1",
+     "Runs": "1",
+     "HS": "1",
+     "Avg": "--",
+     "SR": "11.11",
+     "4s": "0",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "13",
+     "M": "1",
+     "R": "78",
+     "W": "3",
+     "Best": "4/2",
+     "Econ": "6.00",
+     "Avg": "26.00",
+     "SR": "26.0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "1",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "479553",
+    "name": "Dinesh Rajendran",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=479553&clubId=21870",
+    "batting": {
+     "M": "7",
+     "Inns": "7",
+     "NO": "0",
+     "Runs": "158",
+     "HS": "51",
+     "Avg": "22.57",
+     "SR": "80.20",
+     "4s": "14",
+     "6s": "3",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "2",
+     "M": "0",
+     "R": "20",
+     "W": "0",
+     "Best": "0/0",
+     "Econ": "10.00",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "768129",
+    "name": "Hari Gangula",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "VC"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=768129&clubId=21870",
+    "batting": {
+     "M": "13",
+     "Inns": "11",
+     "NO": "2",
+     "Runs": "185",
+     "HS": "61",
+     "Avg": "20.56",
+     "SR": "81.14",
+     "4s": "15",
+     "6s": "5",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "12",
+     "M": "0",
+     "R": "86",
+     "W": "4",
+     "Best": "21/3",
+     "Econ": "7.17",
+     "Avg": "21.50",
+     "SR": "18.0"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "1",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "1"
+    }
+   },
+   {
+    "id": "2032095",
+    "name": "Harsh Patel",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2032095&clubId=21870",
+    "batting": {
+     "M": "6",
+     "Inns": "5",
+     "NO": "0",
+     "Runs": "91",
+     "HS": "50",
+     "Avg": "18.20",
+     "SR": "110.98",
+     "4s": "6",
+     "6s": "4",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "42",
+     "M": "4",
+     "R": "145",
+     "W": "11",
+     "Best": "21/3",
+     "Econ": "3.45",
+     "Avg": "13.18",
+     "SR": "22.9"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4407932",
+    "name": "Harwinder Singh",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Fast",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4407932&clubId=21870"
+   },
+   {
+    "id": "1266512",
+    "name": "Krishnateja Vedantam",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1266512&clubId=21870",
+    "batting": {
+     "M": "11",
+     "Inns": "9",
+     "NO": "1",
+     "Runs": "112",
+     "HS": "46",
+     "Avg": "14.00",
+     "SR": "121.74",
+     "4s": "7",
+     "6s": "7",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "23.5",
+     "M": "2",
+     "R": "123",
+     "W": "5",
+     "Best": "6/1",
+     "Econ": "5.16",
+     "Avg": "24.60",
+     "SR": "28.6"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "0",
+     "RoD": "2",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1785426",
+    "name": "Madhur Katyal",
+    "role": "Wicket Keeper",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "WK"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1785426&clubId=21870",
+    "batting": {
+     "M": "10",
+     "Inns": "7",
+     "NO": "0",
+     "Runs": "155",
+     "HS": "64",
+     "Avg": "22.14",
+     "SR": "81.58",
+     "4s": "13",
+     "6s": "5",
+     "50s": "2",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "46",
+     "M": "5",
+     "R": "194",
+     "W": "10",
+     "Best": "17/4",
+     "Econ": "4.22",
+     "Avg": "19.40",
+     "SR": "27.6"
+    },
+    "fielding": {
+     "Ct": "8",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "3386513",
+    "name": "Nutan Kunchapu",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=3386513&clubId=21870",
+    "batting": {
+     "M": "2",
+     "Inns": "2",
+     "NO": "0",
+     "Runs": "34",
+     "HS": "23",
+     "Avg": "17.00",
+     "SR": "77.27",
+     "4s": "2",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "fielding": {
+     "Ct": "0",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "1493960",
+    "name": "Raman Seem",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=1493960&clubId=21870",
+    "batting": {
+     "M": "8",
+     "Inns": "3",
+     "NO": "3",
+     "Runs": "7",
+     "HS": "5",
+     "Avg": "--",
+     "SR": "77.78",
+     "4s": "1",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "42",
+     "M": "2",
+     "R": "209",
+     "W": "8",
+     "Best": "27/2",
+     "Econ": "4.98",
+     "Avg": "26.12",
+     "SR": "31.5"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2241695",
+    "name": "Ramji Seetharaman",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2241695&clubId=21870",
+    "batting": {
+     "M": "6",
+     "Inns": "4",
+     "NO": "2",
+     "Runs": "52",
+     "HS": "26",
+     "Avg": "26.00",
+     "SR": "83.87",
+     "4s": "2",
+     "6s": "2",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "18",
+     "M": "0",
+     "R": "143",
+     "W": "4",
+     "Best": "14/2",
+     "Econ": "7.94",
+     "Avg": "35.75",
+     "SR": "27.0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2629398",
+    "name": "Ravikumar Kv",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2629398&clubId=21870",
+    "batting": {
+     "M": "14",
+     "Inns": "11",
+     "NO": "1",
+     "Runs": "146",
+     "HS": "35",
+     "Avg": "14.60",
+     "SR": "92.41",
+     "4s": "9",
+     "6s": "5",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "70.1",
+     "M": "2",
+     "R": "419",
+     "W": "18",
+     "Best": "18/4",
+     "Econ": "5.97",
+     "Avg": "23.28",
+     "SR": "23.4"
+    },
+    "fielding": {
+     "Ct": "4",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "2032091",
+    "name": "Ronald Rexson",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Medium",
+    "flags": [
+     "C"
+    ],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=2032091&clubId=21870",
+    "batting": {
+     "M": "12",
+     "Inns": "11",
+     "NO": "2",
+     "Runs": "858",
+     "HS": "243",
+     "Avg": "95.33",
+     "SR": "179.12",
+     "4s": "55",
+     "6s": "79",
+     "50s": "3",
+     "100s": "4"
+    },
+    "bowling": {
+     "O": "47",
+     "M": "3",
+     "R": "250",
+     "W": "6",
+     "Best": "28/2",
+     "Econ": "5.32",
+     "Avg": "41.67",
+     "SR": "47.0"
+    },
+    "fielding": {
+     "Ct": "9",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4561595",
+    "name": "Rupam Rai",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4561595&clubId=21870",
+    "batting": {
+     "M": "13",
+     "Inns": "13",
+     "NO": "2",
+     "Runs": "303",
+     "HS": "86",
+     "Avg": "27.55",
+     "SR": "86.08",
+     "4s": "18",
+     "6s": "10",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "15",
+     "M": "0",
+     "R": "87",
+     "W": "3",
+     "Best": "8/1",
+     "Econ": "5.80",
+     "Avg": "29.00",
+     "SR": "30.0"
+    },
+    "fielding": {
+     "Ct": "1",
+     "WkCt": "3",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4310248",
+    "name": "Sai Abhijyan Tanikella",
+    "role": "All Rounder",
+    "batStyle": "Right Hand Batter (Top Order)",
+    "bowlStyle": "",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4310248&clubId=21870",
+    "batting": {
+     "M": "11",
+     "Inns": "8",
+     "NO": "1",
+     "Runs": "144",
+     "HS": "77",
+     "Avg": "20.57",
+     "SR": "72.73",
+     "4s": "5",
+     "6s": "10",
+     "50s": "1",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "27",
+     "M": "0",
+     "R": "157",
+     "W": "5",
+     "Best": "11/2",
+     "Econ": "5.81",
+     "Avg": "31.40",
+     "SR": "32.4"
+    },
+    "fielding": {
+     "Ct": "7",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "1",
+     "St": "0"
+    }
+   },
+   {
+    "id": "6871812",
+    "name": "Satwik Majumder",
+    "role": "Batter",
+    "batStyle": "Right Hand Batter (Middle Order)",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=6871812&clubId=21870",
+    "batting": {
+     "M": "6",
+     "Inns": "5",
+     "NO": "3",
+     "Runs": "23",
+     "HS": "11",
+     "Avg": "11.50",
+     "SR": "71.88",
+     "4s": "1",
+     "6s": "0",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "20",
+     "M": "0",
+     "R": "145",
+     "W": "7",
+     "Best": "41/3",
+     "Econ": "7.25",
+     "Avg": "20.71",
+     "SR": "17.1"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "767922",
+    "name": "Sehul Patel",
+    "role": "All Rounder",
+    "batStyle": "Left Hand Batter (Top Order)",
+    "bowlStyle": "Left Arm Orthodox",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=767922&clubId=21870",
+    "batting": {
+     "M": "9",
+     "Inns": "9",
+     "NO": "1",
+     "Runs": "115",
+     "HS": "32",
+     "Avg": "14.38",
+     "SR": "66.86",
+     "4s": "7",
+     "6s": "3",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "4.4",
+     "M": "0",
+     "R": "40",
+     "W": "3",
+     "Best": "19/2",
+     "Econ": "8.57",
+     "Avg": "13.33",
+     "SR": "9.3"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "4557279",
+    "name": "Shailesh Patel",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Left Arm Leg Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=4557279&clubId=21870",
+    "batting": {
+     "M": "7",
+     "Inns": "5",
+     "NO": "3",
+     "Runs": "29",
+     "HS": "13",
+     "Avg": "14.50",
+     "SR": "63.04",
+     "4s": "0",
+     "6s": "1",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "38",
+     "M": "3",
+     "R": "177",
+     "W": "11",
+     "Best": "22/4",
+     "Econ": "4.66",
+     "Avg": "16.09",
+     "SR": "20.7"
+    },
+    "fielding": {
+     "Ct": "3",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   },
+   {
+    "id": "5050825",
+    "name": "Siddartha Reddy Yalluri",
+    "role": "All Rounder",
+    "batStyle": "Right Handed Batter",
+    "bowlStyle": "Right Arm Off Spin",
+    "flags": [],
+    "url": "https://cricclubs.com/MillenniumForty40/viewPlayer.do?playerId=5050825&clubId=21870",
+    "batting": {
+     "M": "2",
+     "Inns": "2",
+     "NO": "1",
+     "Runs": "16",
+     "HS": "9",
+     "Avg": "16.00",
+     "SR": "114.29",
+     "4s": "1",
+     "6s": "1",
+     "50s": "0",
+     "100s": "0"
+    },
+    "bowling": {
+     "O": "6",
+     "M": "0",
+     "R": "49",
+     "W": "0",
+     "Best": "23/0",
+     "Econ": "8.17",
+     "Avg": "0",
+     "SR": "0.0"
+    },
+    "fielding": {
+     "Ct": "2",
+     "WkCt": "0",
+     "RoD": "0",
+     "RoI": "0",
+     "St": "0"
+    }
+   }
+  ]
+ }
+}

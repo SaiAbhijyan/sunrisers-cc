@@ -1,0 +1,12 @@
+node_modules/
+test-results/
+dist/.hallmark/
+.hallmark/
+dist/
+shots/
+video/
+docs/lighthouse/*.json
+tests/results.json
+*.log
+.DS_Store
+research/cc/

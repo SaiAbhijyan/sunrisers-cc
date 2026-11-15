@@ -1,0 +1,27 @@
+---
+title: Results and fixtures
+description: Every Sunrisers match from three New Jersey leagues in 2026, with scores, overs and links to each scorecard on CricClubs. Filter by squad.
+nav: fixtures
+---
+<section class="phero"><div class="wrap"><h1>Results and fixtures</h1><p class="lede">Every 2026 match from the three squads. Pick a league, or see them all. Each card opens the full scorecard on CricClubs.</p></div></section>
+<section class="band band--ink2">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 class="display-m">Upcoming fixtures</h2>
+        <p class="lede">Upcoming fixtures were not part of the data read on 14 Nov 2026. The live schedule for each squad is on its CricClubs team page.</p>
+      </div>
+      <div class="reveal">
+        {{squadlinks}}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="band band--paper" id="results">
+  <div class="wrap">
+    <div class="band__head"><h2 class="display-l">All results</h2><p class="small dim">Newest first. An amber edge marks a Sunrisers win. Abandoned and forfeited matches show no score.</p></div>
+    {{filter}}
+    {{allresults}}
+    {{updated}}
+  </div>
+</section>

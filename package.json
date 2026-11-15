@@ -1,0 +1,22 @@
+{
+  "name": "sunrisers-nj-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static website for Sunrisers (cricket, New Jersey, USA). No runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node tests/serve.mjs",
+    "validate": "html-validate dist",
+    "test": "node build.mjs && playwright test",
+    "audit": "npm audit --audit-level=low"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@fontsource/big-shoulders-display": "^5.3.0",
+    "@fontsource/hanken-grotesk": "^5.3.0",
+    "@playwright/test": "^1.65.1",
+    "html-validate": "^11.21.1",
+    "lighthouse": "^13.6.0"
+  }
+}

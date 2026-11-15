@@ -1,0 +1,20 @@
+<header class="masthead">
+  <div class="masthead__inner">
+    <a class="brand" href="index.html" aria-label="Sunrisers New Jersey, home">
+      <!-- BRAND SLOT: replace assets/img/logo-slot.svg with the Sunrisers logo from Kittl -->
+      <img class="brand__logo" src="assets/img/logo-slot.svg" alt="" width="44" height="44">
+      <span class="brand__name">Sunrisers<span class="brand__sub"> New Jersey</span></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-toggle__bars" aria-hidden="true"></span>
+      <span class="menu-toggle__label">Menu</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul class="nav__list">
+        {{navlinks}}
+      </ul>
+      <a class="btn btn--sun nav__cta" href="join.html">Join the team</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
