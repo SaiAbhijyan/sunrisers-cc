@@ -274,7 +274,7 @@ html { scrollbar-color: var(--sun) var(--ink); }
   .js .hero .lede, .js .hero__actions, .js .phero h1, .js .phero .lede { animation: none; }
   .brand__logo, .lh, .lh::after, .leaguelink, .leaguelink::before, .leaguelink__go { transition: none; }
   .js .reveal { opacity: 1; translate: none; transition: none; }
-  .btn, .score, .teamlist__link, .teamlist__name, .teamlist__meta, .teamlist__link::before, .nav__link::after, .link-arrow { transition: none; }
+  .btn, .score, .teamlist__link, .teamlist__name, .teamlist__meta, .teamlist__link::before, .nav__link::after, .link-arrow, .photo img, .lightbox, .lightbox::backdrop { transition: none; }
 }
 
 .note { margin-top: 1.5rem; }
@@ -290,8 +290,54 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .marquee__item:last-child::after { display: none; }
 .photowall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(14rem, 18rem)); gap: 1.25rem; }
 .photowall li:first-child { grid-row: span 2; }
-.photowall .slot { height: 100%; aspect-ratio: auto; }
-@media (max-width: 699px) { .photowall { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .photowall li:first-child { grid-row: auto; } .photowall .slot { min-height: 14rem; } }
+.photowall .slot, .photowall .photo { height: 100%; aspect-ratio: auto; }
+@media (max-width: 699px) { .photowall { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .photowall li:first-child { grid-row: auto; } .photowall .slot, .photowall .photo { min-height: 14rem; aspect-ratio: 4 / 3; height: auto; } }
+
+/* ---------- team photographs ---------- */
+.photo { position: relative; display: block; overflow: clip; background: var(--ink-3); text-decoration: none; color: inherit; }
+.photo picture, .photo img { width: 100%; height: 100%; }
+.photo img { max-width: none; object-fit: cover; object-position: 50% 50%; }
+.photo--pos-mid img { object-position: 50% 50%; }
+.photo--pos-upper img { object-position: 50% 32%; }
+.photo--pos-faces img { object-position: 50% 40%; }
+.photo--pos-left img { object-position: 46% 50%; }
+.photogrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.photogrid .photo { aspect-ratio: 4 / 3; }
+.photogrid .photo--portrait { aspect-ratio: 3 / 4; }
+.photogrid .clip { margin: 0; }
+@media (max-width: 699px) { .photogrid { grid-template-columns: minmax(0, 1fr); } }
+
+.clip { display: grid; gap: 0.5rem; align-content: start; }
+.clip__video { display: block; width: 100%; height: auto; aspect-ratio: 832 / 464; background: var(--ink); }
+.clip figcaption { margin: 0; font-size: 0.95rem; color: var(--on-paper-dim); max-width: none; }
+.band--ink .clip figcaption, .foot .clip figcaption { color: var(--on-ink-dim); }
+
+.social { margin: 1.1rem 0 0; }
+.social__link { display: inline-flex; align-items: center; gap: 0.55rem; font-weight: 700; text-decoration: none; }
+.social__link:hover, .social__link:focus-visible { color: var(--sun); }
+.band--sun .social__link:hover, .band--sun .social__link:focus-visible, .band--paper .social__link:hover, .band--paper .social__link:focus-visible { color: var(--sun-deep); }
+.social__icon { flex: none; width: 1.25rem; height: 1.25rem; display: block; }
+.social--follow { margin-top: 2rem; }
+
+/* ---------- photograph lightbox ---------- */
+.lightbox { width: min(96vw, 90rem); max-width: 96vw; max-height: 96vh; margin: auto; padding: 3.25rem 3.5rem 1.25rem; border: 0; background: transparent; color: var(--on-ink); overflow: visible; }
+.lightbox::backdrop { background: var(--veil-84); }
+.lightbox__stage { margin: 0; display: grid; place-items: center; }
+.lightbox__img { max-width: min(88vw, 84rem); max-height: 82vh; width: auto; height: auto; object-fit: contain; background: var(--ink); }
+.lightbox__close, .lightbox__prev, .lightbox__next { position: absolute; display: grid; place-items: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0 0.85rem; border: 0; background: var(--sun); color: var(--on-sun); font: 700 0.9rem/1 var(--font-body); cursor: pointer; }
+.lightbox__close { top: 0; right: 0; }
+.lightbox__prev, .lightbox__next { top: 50%; translate: 0 -50%; width: 2.75rem; padding: 0; }
+.lightbox__prev { left: 0; }
+.lightbox__next { right: 0; }
+.lightbox__prev::before, .lightbox__next::before { content: ""; width: 0.9rem; height: 0.9rem; background: currentColor; mask: var(--arrow) center / contain no-repeat; -webkit-mask: var(--arrow) center / contain no-repeat; }
+.lightbox__prev::before { rotate: 180deg; }
+@media (max-width: 699px) {
+  .lightbox { padding: 3.25rem 0.5rem 0.5rem; }
+  .lightbox__prev, .lightbox__next { top: auto; bottom: 0; translate: 0; }
+  .lightbox__prev { left: 0; }
+  .lightbox__next { right: 0; }
+  .lightbox__img { max-height: 72vh; }
+}
 
 /* ---------- match cards: stage, squad label ---------- */
 .score__stage { display: block; margin-top: 0.4rem; font-weight: 700; color: var(--flare); }

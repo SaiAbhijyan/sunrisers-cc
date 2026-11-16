@@ -2,11 +2,11 @@
 """Trace the supplied Milkstore 02 lettering into one crisp, flat, one-colour SVG (the hero and OG wordmark).
 
 Sources (hand-cleaned by Sai: flat cream, hard alpha edges, no halo; see tools/wordmark_src.py for the layout):
-  brand-src/wordmark-sunrisers-est-clean.png    EST. 2017 + SUNRISERS
-  brand-src/wordmark-cricket-club-nj-clean.png  CRICKET CLUB + arched NEW JERSEY USA
+  media/brand/wordmark-sunrisers-est-clean.png    EST. 2017 + SUNRISERS
+  media/brand/wordmark-cricket-club-nj-clean.png  CRICKET CLUB + arched NEW JERSEY USA
 Steps: compose both onto one alpha canvas (Lanczos upscale straight to 8x the final size), blur ~0.5 px to round off the
 pixel steps, cut at 50 percent alpha, trace with potrace (smooth curves, corners kept), optimise with svgo.
-Output: src/assets/img/brand/wordmark.svg (fill currentColor, viewBox 0 0 800 422) and brand-src/wordmark-traced-2x.png
+Output: src/assets/img/brand/wordmark.svg (fill currentColor, viewBox 0 0 800 422) and media/brand/wordmark-traced-2x.png
 (cream, for the OG image).
 Needs potrace (JS) which is NOT a devDependency (it pulls in vulnerable jimp): run `npm i --no-save potrace` first.
 Usage: python3 tools/trace-wordmark.py

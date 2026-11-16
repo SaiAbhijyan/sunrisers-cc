@@ -193,4 +193,101 @@
       status.textContent = `Players sorted: ${sel.selectedOptions[0].textContent}.`;
     });
   });
+
+  // ---- photograph lightbox (progressive: without JS the link opens the photograph) ----
+  const photos = [...document.querySelectorAll("a.photo[data-lightbox]")];
+  if (photos.length) {
+    const dialog = document.createElement("dialog");
+    dialog.className = "lightbox";
+    dialog.setAttribute("aria-label", "Photograph viewer");
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "lightbox__close";
+    closeBtn.textContent = "Close";
+
+    const prevBtn = document.createElement("button");
+    prevBtn.type = "button";
+    prevBtn.className = "lightbox__prev";
+    prevBtn.setAttribute("aria-label", "Previous photograph");
+
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "lightbox__next";
+    nextBtn.setAttribute("aria-label", "Next photograph");
+
+    const figure = document.createElement("figure");
+    figure.className = "lightbox__stage";
+    const img = document.createElement("img");
+    img.className = "lightbox__img";
+    img.alt = "";
+    const cap = document.createElement("figcaption");
+    cap.className = "visually-hidden";
+    cap.setAttribute("aria-live", "polite");
+    figure.append(cap);
+    dialog.append(closeBtn, prevBtn, figure, nextBtn);
+    document.body.append(dialog);
+
+    let index = 0;
+    let returnFocus = null;
+    const show = (i) => {
+      index = (i + photos.length) % photos.length;
+      const link = photos[index];
+      const preview = link.querySelector("img");
+      img.alt = preview ? preview.alt : "";
+      const w = preview && preview.getAttribute("width");
+      const h = preview && preview.getAttribute("height");
+      if (w) img.width = Number(w);
+      if (h) img.height = Number(h);
+      img.src = link.getAttribute("href") || "";
+      if (!img.isConnected) figure.prepend(img);
+      cap.textContent = `${index + 1} of ${photos.length}. ${img.alt}`;
+    };
+    const open = (i, trigger) => {
+      returnFocus = trigger;
+      show(i);
+      dialog.showModal();
+      closeBtn.focus();
+    };
+
+    photos.forEach((link, i) => {
+      link.addEventListener("click", (e) => {
+        if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+        e.preventDefault();
+        open(i, link);
+      });
+    });
+    closeBtn.addEventListener("click", () => dialog.close());
+    prevBtn.addEventListener("click", () => show(index - 1));
+    nextBtn.addEventListener("click", () => show(index + 1));
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "Tab") {
+        const nodes = [closeBtn, prevBtn, nextBtn];
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (e.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || document.activeElement === dialog)) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+      if (e.key === "ArrowLeft") { e.preventDefault(); show(index - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); show(index + 1); }
+    });
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener("close", () => { if (returnFocus) returnFocus.focus(); });
+  }
+
+  // ---- gallery videos: never autoplay; keep them still under reduced motion ----
+  document.querySelectorAll("video").forEach((video) => {
+    video.autoplay = false;
+    video.removeAttribute("autoplay");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.pause();
+      video.removeAttribute("autoplay");
+    }
+  });
+
 })();

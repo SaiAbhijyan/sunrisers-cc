@@ -6,7 +6,7 @@ from PIL import Image
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from wordmark_src import R, compose
 ref = Image.fromarray(compose(1))
-tr = Image.open(R/"brand-src/wordmark-traced-2x.png").convert("RGBA").split()[3].resize(ref.size, Image.LANCZOS)
+tr = Image.open(R/"media/brand/wordmark-traced-2x.png").convert("RGBA").split()[3].resize(ref.size, Image.LANCZOS)
 a = np.array(ref) > 128; b = np.array(tr) > 128
 print("IoU", round((a & b).sum()/(a | b).sum(), 4))
 def on_dark(m, col=(246,241,234)):
@@ -27,7 +27,7 @@ zoom((0,0,400,240), 3, "wordmark-zoom-original-vs-traced.png")
 zoom((120,225,520,422), 3, "wordmark-zoom-bottom-original-vs-traced.png")
 
 # layout check against the home reference: reference crop scaled so SUNRISERS is the same width as ours
-rf = Image.open(R/"brand-src/home-reference.png").convert("RGB").crop((236,138,598,332))
+rf = Image.open(R/"media/brand/home-reference.png").convert("RGB").crop((236,138,598,332))
 rf = rf.resize((round(rf.width*786/347), round(rf.height*786/347)), Image.LANCZOS)
 lock = panels[1]
 sheet2 = Image.new("RGB", (rf.width+lock.width+20, max(rf.height, lock.height)), (0,0,0)); sheet2.paste(rf,(0,0)); sheet2.paste(lock,(rf.width+20,0))

@@ -24,6 +24,7 @@ for (const file of pages) {
       // GitHub Pages cannot send headers, so the meta CSP is the policy there; locally the header is checked too.
       if (!process.env.SITE_ORIGIN) expect(res.headers()["content-security-policy"]).toContain("script-src 'self'");
       await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveAttribute("content", /script-src 'self'; style-src 'self'/);
+      await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveAttribute("content", /media-src 'self'/);
       await expect(page.locator("h1")).toHaveCount(1);
       await expect(page).toHaveTitle(/Sunrisers/);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -513,10 +514,10 @@ test.describe("hero wordmark is a flat, crisp traced vector", () => {
     expect(r.box).toBeGreaterThan(280);
   });
 
-  test("the traced wordmark covers the supplied lettering (pixel overlap with brand-src/wordmark-sunrisers-est-clean.png + wordmark-cricket-club-nj-clean.png)", async ({ page }) => {
+  test("the traced wordmark covers the supplied lettering (pixel overlap with media/brand/wordmark-sunrisers-est-clean.png + wordmark-cricket-club-nj-clean.png)", async ({ page }) => {
     await page.goto("index.html", { waitUntil: "networkidle" });
     await page.waitForTimeout(1800);
-    const src = (f) => readFileSync(join(import.meta.dirname, "..", "brand-src", f)).toString("base64");
+    const src = (f) => readFileSync(join(import.meta.dirname, "..", "media", "brand", f)).toString("base64");
     const iou = await page.evaluate(async ([topB64, botB64]) => {
       const load = async (b) => { const i = new Image(); i.src = "data:image/png;base64," + b; await i.decode(); return i; };
       const top = await load(topB64), bot = await load(botB64);
@@ -894,4 +895,190 @@ test.describe("player cards", () => {
     await expect(page.locator(".psort").first()).toBeHidden();
     await ctx.close();
   });
+});
+
+const featured = [
+  "01-orange-kit-celebration",
+  "02-whites-lifting-trophy",
+  "03-whites-seated-trophies",
+  "04-orange-kit-kneeling-trophy",
+  "05-orange-kit-peace-signs",
+];
+const additional = [
+  "06-whites-team-lineup",
+  "07-orange-team-trophy-dusk",
+  "08-trophy-handshake",
+  "09-orange-kit-kneeling-trophy-alt",
+  "10-whites-batters-walking-off",
+  "11-team-social-patio",
+  "12-team-selfie-toast",
+];
+
+function photoChecks(locator) {
+  return locator.evaluateAll((links) => links.map((a) => {
+    const img = a.querySelector("img");
+    const sources = [...a.querySelectorAll("source")].map((s) => s.getAttribute("type"));
+    return {
+      href: a.getAttribute("href"),
+      alt: img ? img.getAttribute("alt") : "",
+      width: img ? img.getAttribute("width") : "",
+      height: img ? img.getAttribute("height") : "",
+      loading: img ? img.getAttribute("loading") : "",
+      types: sources,
+    };
+  }));
+}
+
+test.describe("gallery photographs", () => {
+  test("home shows the five featured photographs in the photowall, with dimensions and alt text", async ({ page }) => {
+    await page.goto("index.html");
+    const wall = page.locator("#gallery-title").locator("xpath=ancestor::section[1]").locator(".photowall a.photo");
+    await expect(wall).toHaveCount(5);
+    const data = await photoChecks(wall);
+    expect(data.map((d) => d.href)).toEqual(featured.map((s) => `assets/img/gallery/${s}.jpg`));
+    for (const d of data) {
+      expect(Number(d.width), d.href).toBeGreaterThan(0);
+      expect(Number(d.height), d.href).toBeGreaterThan(0);
+      expect(d.alt.length, d.href).toBeGreaterThan(20);
+      expect(d.alt, d.href).not.toMatch(/Abhimanyu|Vellaturi|Bhardwaj/i);
+      expect(d.loading).toBe("lazy");
+      expect(d.types).toEqual(["image/avif", "image/webp"]);
+    }
+    await expect(page.locator("#gallery-title").locator("xpath=ancestor::section[1]")).not.toContainText("Placeholder");
+  });
+
+  test("gallery page leads with the featured five, then the additional photographs", async ({ page }) => {
+    await page.goto("gallery.html");
+    await expect(page.locator("main")).not.toContainText("Placeholder");
+    const wall = page.locator(".photowall a.photo");
+    const grid = page.locator(".photogrid a.photo");
+    await expect(wall).toHaveCount(5);
+    await expect(grid).toHaveCount(additional.length);
+    const featuredData = await photoChecks(wall);
+    const rest = await photoChecks(grid);
+    expect(featuredData.map((d) => d.href)).toEqual(featured.map((s) => `assets/img/gallery/${s}.jpg`));
+    expect(rest.map((d) => d.href)).toEqual(additional.map((s) => `assets/img/gallery/${s}.jpg`));
+    expect(featuredData[0].loading).toBe("eager");
+    for (const d of featuredData.slice(1).concat(rest)) expect(d.loading).toBe("lazy");
+    for (const d of featuredData.concat(rest)) {
+      expect(Number(d.width)).toBeGreaterThan(0);
+      expect(Number(d.height)).toBeGreaterThan(0);
+      expect(d.alt.length).toBeGreaterThan(20);
+      expect(d.types).toEqual(["image/avif", "image/webp"]);
+    }
+  });
+
+  test("lightbox opens a photograph, arrows move, Escape closes, and focus returns", async ({ page }) => {
+    await page.goto("gallery.html");
+    const first = page.locator(".photowall a.photo").first();
+    await first.click();
+    const dialog = page.locator("dialog.lightbox");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator(".lightbox__img")).toHaveAttribute("src", /01-orange-kit-celebration\.jpg$/);
+    await expect(page.locator(".lightbox__close")).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(dialog.locator(".lightbox__img")).toHaveAttribute("src", /02-whites-lifting-trophy\.jpg$/);
+    await page.keyboard.press("ArrowLeft");
+    await expect(dialog.locator(".lightbox__img")).toHaveAttribute("src", /01-orange-kit-celebration\.jpg$/);
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(first).toBeFocused();
+  });
+
+  test("lightbox traps focus inside the dialog", async ({ page, isMobile }) => {
+    test.skip(isMobile, "focus-visible tab order is asserted on desktop");
+    await page.goto("gallery.html");
+    await page.locator(".photowall a.photo").first().click();
+    const dialog = page.locator("dialog.lightbox");
+    await expect(dialog).toBeVisible();
+    const focused = [];
+    for (let i = 0; i < 8; i++) {
+      await page.keyboard.press("Tab");
+      focused.push(await page.evaluate(() => {
+        const el = document.activeElement;
+        return el && (el.closest("dialog.lightbox") === document.querySelector("dialog.lightbox"));
+      }));
+    }
+    expect(focused.every(Boolean)).toBe(true);
+    await page.keyboard.press("Escape");
+  });
+
+  test("lightbox still works when the visitor prefers reduced motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("gallery.html");
+    await page.locator(".photowall a.photo").nth(2).click();
+    const dialog = page.locator("dialog.lightbox");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator(".lightbox__img")).toHaveAttribute("src", /03-whites-seated-trophies\.jpg$/);
+    await page.locator(".lightbox__next").click();
+    await expect(dialog.locator(".lightbox__img")).toHaveAttribute("src", /04-orange-kit-kneeling-trophy\.jpg$/);
+    await page.locator(".lightbox__close").click();
+    await expect(dialog).toBeHidden();
+  });
+
+  test("without JavaScript the photographs remain visible and link to the file", async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(ROOT + "gallery.html");
+    await expect(page.locator(".photowall a.photo, .photogrid a.photo")).toHaveCount(featured.length + additional.length);
+    await expect(page.locator("dialog.lightbox")).toHaveCount(0);
+    await expect(page.locator('.photowall a.photo').first()).toHaveAttribute("href", "assets/img/gallery/01-orange-kit-celebration.jpg");
+    await ctx.close();
+  });
+
+  test("gallery includes a muted match clip with poster, controls, and no autoplay", async ({ page }) => {
+    await page.goto("gallery.html");
+    const video = page.locator("video.clip__video");
+    await expect(video).toHaveCount(1);
+    await expect(video).toHaveAttribute("controls", "");
+    await expect(video).toHaveAttribute("playsinline", "");
+    await expect(video).toHaveAttribute("preload", "none");
+    await expect(video).toHaveAttribute("poster", /13-match-clip-poster\.jpg$/);
+    await expect(video).toHaveAttribute("muted", "");
+    await expect(video).not.toHaveAttribute("autoplay");
+    await expect(video.locator('source[type="video/webm"]')).toHaveAttribute("src", /13-match-clip\.webm$/);
+    await expect(video.locator('source[type="video/mp4"]')).toHaveAttribute("src", /13-match-clip\.mp4$/);
+    await expect(page.locator(".clip figcaption")).toContainText(/Sunrisers players in white kit during a match/i);
+    await expect(page.locator(".clip")).not.toContainText(/Deepak/i);
+    const paused = await video.evaluate((v) => v.paused && !v.autoplay);
+    expect(paused).toBe(true);
+  });
+
+  test("the match clip stays paused when the visitor prefers reduced motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("gallery.html");
+    const video = page.locator("video.clip__video");
+    await expect(video).toHaveCount(1);
+    expect(await video.evaluate((v) => v.paused && !v.autoplay)).toBe(true);
+  });
+});
+
+test.describe("Instagram", () => {
+  const IG = "https://www.instagram.com/sunrisers_nj/";
+  test("the footer on every page links to @sunrisers_nj with an accessible label", async ({ page }) => {
+    await page.goto("index.html");
+    const link = page.locator("footer a[href='https://www.instagram.com/sunrisers_nj/']");
+    await expect(link).toHaveCount(1);
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", /noopener/);
+    await expect(link).toHaveAttribute("aria-label", /Instagram.*@sunrisers_nj/i);
+    await expect(link.locator("svg.social__icon")).toHaveCount(1);
+  });
+
+  test("the contact and gallery pages also have a Follow us on Instagram link", async ({ page }) => {
+    await page.goto("contact.html");
+    const contact = page.locator("main a[href='https://www.instagram.com/sunrisers_nj/']");
+    await expect(contact).toHaveCount(1);
+    await expect(contact).toContainText(/Instagram/i);
+    await expect(contact).toHaveAttribute("target", "_blank");
+    await expect(contact).toHaveAttribute("rel", /noopener/);
+    await page.goto("gallery.html");
+    const gallery = page.locator("main a[href='https://www.instagram.com/sunrisers_nj/']");
+    await expect(gallery).toHaveCount(1);
+    await expect(gallery).toContainText(/Follow us on Instagram/i);
+    await expect(gallery).toHaveAttribute("target", "_blank");
+    await expect(gallery).toHaveAttribute("rel", /noopener/);
+    await expect(gallery.locator("svg.social__icon")).toHaveCount(1);
+  });
+
 });

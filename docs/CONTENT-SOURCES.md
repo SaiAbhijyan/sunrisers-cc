@@ -21,7 +21,7 @@
 cricclubs.com is behind a Cloudflare challenge for automated tools. It was not bypassed. The data above was read in a normal browser session on the box and saved to `research/`. Points tables and league pages were not read.
 
 ## PLACEHOLDERS (labelled in the UI)
-History, captains and officials beyond the CricClubs flags, ground and address, contact details, fees and practice times, news, events, gallery photos, sponsors. The logo, wordmark and texture are the club's own files in `brand-src/`.
+History, captains and officials beyond the CricClubs flags, ground and address, contact details, fees and practice times, news, events, sponsors. Team photographs and match clips for the gallery live in `media/gallery/`. The logo, wordmark and texture are the club's own files in `media/brand/`.
 
 ## REMOVED
 All Standard Athletic Club CC content. A test fails the build if any of it returns.

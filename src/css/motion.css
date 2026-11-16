@@ -43,6 +43,11 @@
   /* league swap entrance for cards is handled by .reveal re-arming (motion.js) */
   .scores > li.reveal::before { scale: 1 0; transform-origin: top; transition: scale 600ms var(--ease) calc(var(--d, 0ms) + 120ms); }
   .scores > li.reveal.is-in::before { scale: 1 1; }
+
+  .photo img { transition: transform 480ms var(--ease); }
+  .photo:hover img, .photo:focus-visible img { transform: scale(1.04); }
+  .lightbox[open] { animation: sr-fade-in 220ms var(--ease) both; }
+  .lightbox::backdrop { animation: sr-fade-in 220ms ease-out both; }
 }
 
 /* ---------- native scroll-driven effects (Chrome, Edge, Safari 26+). Others get the static page. ---------- */

@@ -14,7 +14,7 @@
    ========================================================== */
 :root {
   /* BRAND SLOT 1: colours (replace with club/Kittl palette) */
-  /* Sampled from Sai's home reference (brand-src/home-reference.png): the foil highlights are #c83203 to #e0430c,
+  /* Sampled from Sai's home reference (media/brand/home-reference.png): the foil highlights are #c83203 to #e0430c,
      oklch hue 35. The black is the reference's red-tinted black. --sun is the lightest step of that red-orange that
      still gives 5.4:1 against both the black ground and black text (AA); --sun-deep is the same hue darkened to
      5.4:1 on the warm paper; they are the only two accent steps (text on dark uses --sun, text on paper --sun-deep). */

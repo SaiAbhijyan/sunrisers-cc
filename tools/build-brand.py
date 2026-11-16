@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the optimised brand images from brand-src/ (originals are kept untouched).
+"""Build the optimised brand images from media/brand/ (originals are kept untouched).
 - texture.png: crop the white strip (top) and orange bar (bottom), recolour to the home reference's red-orange
   by histogram-matching the texture's brightness to colours sampled from home-reference.png.
 - hero texture is a mirrored pair (mirror seam sits behind the centred wordmark) so it fills a wide screen.
@@ -11,7 +11,7 @@ from PIL import Image, ImageFilter, ImageDraw
 from pathlib import Path
 
 root = Path(__file__).resolve().parent.parent
-S = root / "brand-src"
+S = root / "media" / "brand"
 O = root / "src/assets/img/brand"
 O.mkdir(parents=True, exist_ok=True)
 

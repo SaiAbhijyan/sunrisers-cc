@@ -1,8 +1,8 @@
 """Shared by trace-wordmark.py and compare-wordmark.py: compose the two supplied wordmark halves into one alpha canvas.
 
-  brand-src/wordmark-sunrisers-est-clean.png     800x230  EST. 2017 + SUNRISERS (hand-cleaned)   placed 1:1 at the top
-  brand-src/wordmark-cricket-club-nj-clean.png   800x314  CRICKET / CLUB / arched NEW JERSEY USA (hand-cleaned), placed at BOT_K scale
-Layout is taken from brand-src/home-reference.png: CRICKET is 0.32 of the SUNRISERS width and starts a hair under it,
+  media/brand/wordmark-sunrisers-est-clean.png     800x230  EST. 2017 + SUNRISERS (hand-cleaned)   placed 1:1 at the top
+  media/brand/wordmark-cricket-club-nj-clean.png   800x314  CRICKET / CLUB / arched NEW JERSEY USA (hand-cleaned), placed at BOT_K scale
+Layout is taken from media/brand/home-reference.png: CRICKET is 0.32 of the SUNRISERS width and starts a hair under it,
 the arch is 0.58 of the SUNRISERS width.  (CRICKET is 423px wide in the supplied file; 250 / 423 = 0.59.)
 Keep the constants in sync with the overlap test in tests/site.spec.mjs.
 """
@@ -16,7 +16,7 @@ BOT_K = 0.59             # scale of the cricket-club file
 BOT_X, BOT_Y = 165, 236  # where its top-left lands (centres CRICKET under SUNRISERS, ~6px under the lowest S)
 
 def alpha(name):
-    return Image.open(R / "brand-src" / name).convert("RGBA").getchannel("A")
+    return Image.open(R / "media" / "brand" / name).convert("RGBA").getchannel("A")
 
 def compose(S=1, resample=Image.LANCZOS):
     """Return the lockup alpha as a uint8 array at S times the 800x422 canvas."""

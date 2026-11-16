@@ -11,7 +11,7 @@ npx html-validate dist/*.html
 tests/lighthouse-all.sh
 ```
 Layout: `src/pages` (content), `src/partials` (layout, header, footer, form), `src/css/tokens.css` (the only place for colours and fonts), `src/css/site.css`, `src/js`, `src/data/club.json` (squads, CricClubs links, results), `src/data/players.json` (generated from `research/player-stats/` by `tools/import-player-stats.py`), `src/css/motion.css` and `src/js/motion.js` (scroll animation, see `docs/MOTION.md`), `build.mjs`.
-Brand art: `brand-src/` (originals) to `src/assets/img/brand/` via `python3 tools/build-brand.py`. See `docs/BRAND-SLOTS.md`, `docs/CONTENT-SOURCES.md`, `docs/SECURITY.md`, `docs/TEST-REPORT.md`, `HALLMARK_PICKS.md`.
+Brand art: `media/brand/` (originals) to `src/assets/img/brand/` via `python3 tools/build-brand.py`. See `docs/BRAND-SLOTS.md`, `docs/CONTENT-SOURCES.md`, `docs/SECURITY.md`, `docs/TEST-REPORT.md`, `HALLMARK_PICKS.md`.
 Pages: home, about, squads, results, news, events, gallery, sponsors, ground, contact, join, 404.
 
 ## Publishing (GitHub Pages)

@@ -1,5 +1,5 @@
 # Security notes
-- CSP (meta tag in every page and `dist/_headers`): `default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'` plus `frame-ancestors 'none'` in headers. No `unsafe-inline`, no `unsafe-eval`. Consequence: no inline scripts or `style=""` attributes anywhere; the build and tests enforce this.
+- CSP (meta tag in every page and `dist/_headers`): `default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'` plus `frame-ancestors 'none'` in headers. No `unsafe-inline`, no `unsafe-eval`. Consequence: no inline scripts or `style=""` attributes anywhere; the build and tests enforce this.
 - No third-party scripts, fonts, analytics, cookies, embeds or maps. Fonts are self-hosted (OFL). The map is a link out.
 - External links: the build adds `target="_blank" rel="noopener noreferrer"` and a screen-reader "(opens in a new tab)" hint to every absolute URL.
 - JS never writes HTML: dynamic text uses `textContent` only. Form payloads are JSON-encoded, never concatenated into markup.

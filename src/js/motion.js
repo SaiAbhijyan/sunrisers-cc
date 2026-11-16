@@ -36,7 +36,7 @@
   // ---- 2. reveals ----
   const SELECTORS = [
     ".reveal", ".scores > li", ".teamlist__item", ".stats__cell", ".roster li", ".news-card", ".sponsor-slot",
-    ".photowall li", ".facts__row", ".people__item", ".pcard", ".leaders__cell", ".split > *", ".band__head", ".league-group__h",
+    ".photowall li", ".photogrid li", ".facts__row", ".people__item", ".pcard", ".leaders__cell", ".split > *", ".band__head", ".league-group__h",
   ];
   // Browsers without native view() timelines get the big headings as ordinary reveals instead of the wipe.
   if (!supports("animation-timeline: view()")) SELECTORS.push(".band .display-l", ".band .display-m", ".band .statement");

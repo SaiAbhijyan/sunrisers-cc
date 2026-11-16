@@ -6,5 +6,5 @@ const b = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args
 const [vw, vh] = svg.match(/viewBox="0 0 (\d+) (\d+)"/).slice(1).map(Number);
 const p = await b.newPage({ viewport: { width: 1600, height: Math.round((1600 * vh) / vw) } });
 await p.setContent(`<body style="margin:0;background:transparent"><div style="width:1600px">${svg}</div>`);
-await p.screenshot({ path: "brand-src/wordmark-traced-2x.png", omitBackground: true });
+await p.screenshot({ path: "media/brand/wordmark-traced-2x.png", omitBackground: true });
 await b.close();
