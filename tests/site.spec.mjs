@@ -912,6 +912,15 @@ const additional = [
   "10-whites-batters-walking-off",
   "11-team-social-patio",
   "12-team-selfie-toast",
+  "14-batters-mid-pitch",
+  "15-team-backyard-bbq",
+  "16-players-bench-under-tree",
+  "17-batter-pull-shot",
+  "18-batter-jersey-26",
+  "19-batter-at-crease-jersey-48",
+  "20-players-with-match-ball",
+  "21-award-presentation",
+  "22-players-whites-with-trophy",
 ];
 
 function photoChecks(locator) {
@@ -1066,30 +1075,38 @@ test.describe("gallery photographs", () => {
     await ctx.close();
   });
 
-  test("gallery includes a muted match clip with poster, controls, and no autoplay", async ({ page }) => {
+  test("gallery includes muted match clips with poster, controls, and no autoplay", async ({ page }) => {
     await page.goto("gallery.html");
-    const video = page.locator("video.clip__video");
-    await expect(video).toHaveCount(1);
-    await expect(video).toHaveAttribute("controls", "");
-    await expect(video).toHaveAttribute("playsinline", "");
-    await expect(video).toHaveAttribute("preload", "none");
-    await expect(video).toHaveAttribute("poster", /13-match-clip-poster\.jpg$/);
-    await expect(video).toHaveAttribute("muted", "");
-    await expect(video).not.toHaveAttribute("autoplay");
-    await expect(video.locator('source[type="video/webm"]')).toHaveAttribute("src", /13-match-clip\.webm$/);
-    await expect(video.locator('source[type="video/mp4"]')).toHaveAttribute("src", /13-match-clip\.mp4$/);
-    await expect(page.locator(".clip figcaption")).toContainText(/Sunrisers players in white kit during a match/i);
-    await expect(page.locator(".clip")).not.toContainText(/Deepak/i);
-    const paused = await video.evaluate((v) => v.paused && !v.autoplay);
-    expect(paused).toBe(true);
+    const videos = page.locator("video.clip__video");
+    const slugs = ["13-match-clip", "23-batter-at-crease", "24-match-on-the-field"];
+    await expect(videos).toHaveCount(slugs.length);
+    for (let i = 0; i < slugs.length; i++) {
+      const video = videos.nth(i);
+      await expect(video).toHaveAttribute("controls", "");
+      await expect(video).toHaveAttribute("playsinline", "");
+      await expect(video).toHaveAttribute("preload", "none");
+      await expect(video).toHaveAttribute("muted", "");
+      await expect(video).not.toHaveAttribute("autoplay");
+      await expect(video).toHaveAttribute("poster", new RegExp(`${slugs[i]}-poster\\.jpg$`));
+      await expect(video.locator('source[type="video/webm"]')).toHaveAttribute("src", new RegExp(`${slugs[i]}\\.webm$`));
+      await expect(video.locator('source[type="video/mp4"]')).toHaveAttribute("src", new RegExp(`${slugs[i]}\\.mp4$`));
+      expect(await video.evaluate((v) => v.paused && !v.autoplay)).toBe(true);
+    }
+    const captions = page.locator(".clip figcaption");
+    await expect(captions).toHaveCount(3);
+    for (let i = 0; i < 3; i++) {
+      await expect(captions.nth(i)).not.toContainText(/Deepak|Reky|Cheeky/i);
+    }
   });
 
-  test("the match clip stays paused when the visitor prefers reduced motion", async ({ page }) => {
+  test("the match clips stay paused when the visitor prefers reduced motion", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("gallery.html");
-    const video = page.locator("video.clip__video");
-    await expect(video).toHaveCount(1);
-    expect(await video.evaluate((v) => v.paused && !v.autoplay)).toBe(true);
+    const videos = page.locator("video.clip__video");
+    await expect(videos).toHaveCount(3);
+    for (let i = 0; i < 3; i++) {
+      expect(await videos.nth(i).evaluate((v) => v.paused && !v.autoplay)).toBe(true);
+    }
   });
 });
 

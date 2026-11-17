@@ -315,6 +315,7 @@ html { scrollbar-color: var(--sun) var(--ink); }
 .photogrid .photo, .photogrid .photo--portrait { aspect-ratio: 4 / 3; }
 .photogrid .clip { margin: 0; display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
 .photogrid .clip__video { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.photogrid .clip--portrait .clip__video { object-position: 50% 58%; }
 .photowall + .band__head { margin-top: clamp(2.5rem, 5vw, 4rem); position: relative; z-index: 1; }
 
 .clip { display: grid; gap: 0.5rem; align-content: start; }

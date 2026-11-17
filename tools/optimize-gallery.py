@@ -62,6 +62,42 @@ PHOTOS = [
         "slug": "12-team-selfie-toast",
         "alt": "Sunrisers players together at night, raising cups in a group toast.",
     },
+    {
+        "slug": "14-batters-mid-pitch",
+        "alt": "Two Sunrisers batters in white kit meeting mid-pitch on a grassy field, with woods behind them.",
+    },
+    {
+        "slug": "15-team-backyard-bbq",
+        "alt": "Sunrisers players gathered around a table of food at a backyard barbecue.",
+    },
+    {
+        "slug": "16-players-bench-under-tree",
+        "alt": "Sunrisers players in white kit sitting and standing around a bench under a tree.",
+    },
+    {
+        "slug": "17-batter-pull-shot",
+        "alt": "A Sunrisers batter in white kit playing a pull shot on a grassy field.",
+    },
+    {
+        "slug": "18-batter-jersey-26",
+        "alt": "A Sunrisers batter seen from behind in a white jersey numbered 26, wearing a helmet.",
+    },
+    {
+        "slug": "19-batter-at-crease-jersey-48",
+        "alt": "A Sunrisers batter in a white jersey numbered 48 at the crease, with the stumps in view.",
+    },
+    {
+        "slug": "20-players-with-match-ball",
+        "alt": "Two Sunrisers players in white kit standing on the field, holding a red match ball.",
+    },
+    {
+        "slug": "21-award-presentation",
+        "alt": "Two people on a grassy field holding a small trophy, one in a grey hoodie and one in a black fleece.",
+    },
+    {
+        "slug": "22-players-whites-with-trophy",
+        "alt": "Two Sunrisers players in white kit holding a trophy, one wearing a wide-brimmed hat.",
+    },
 ]
 
 
@@ -83,9 +119,10 @@ def save_variants(im: Image.Image, slug: str, widths: list[int]) -> list[int]:
 def main() -> None:
     src_dir = SRC
     OUT.mkdir(parents=True, exist_ok=True)
-    # clear previous derivatives only (keep directory)
+    # Replace derivatives for the listed photographs only; leave video posters and other files alone.
+    slugs = {photo["slug"] for photo in PHOTOS}
     for p in OUT.glob("*"):
-        if p.is_file():
+        if p.is_file() and any(p.name == slug + p.suffix or p.name.startswith(slug + "-") for slug in slugs):
             p.unlink()
 
     print("slug\twidth\theight\torig_bytes\tsizes")
