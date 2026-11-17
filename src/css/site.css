@@ -288,24 +288,34 @@ html { scrollbar-color: var(--sun) var(--ink); }
 }
 .ph + p, .ph + .link-arrow { margin-top: 1.25rem; }
 .marquee__item:last-child::after { display: none; }
-.photowall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(14rem, 18rem)); gap: 1.25rem; }
-.photowall li:first-child { grid-row: span 2; }
-.photowall .slot, .photowall .photo { height: 100%; aspect-ratio: auto; }
-@media (max-width: 699px) { .photowall { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .photowall li:first-child { grid-row: auto; } .photowall .slot, .photowall .photo { min-height: 14rem; aspect-ratio: 4 / 3; height: auto; } }
+/* Aspect-ratio tiles, not fixed rem rows: the bento stays the same shape
+   at 1024px as at 1440px, so group shots are not cropped to the sky. */
+.photowall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; max-width: 100%; align-items: stretch; }
+.photowall > li { min-width: 0; min-height: 0; display: flex; }
+.photowall > li:first-child { grid-row: span 2; }
+.photowall .photo { flex: 1 1 auto; width: 100%; }
+.photowall > li:first-child .photo { aspect-ratio: auto; height: 100%; }
+@media (max-width: 699px) {
+  .photowall { grid-template-columns: minmax(0, 1fr); }
+  .photowall > li:first-child { grid-row: auto; }
+  .photowall > li:first-child .photo { aspect-ratio: 4 / 3; height: auto; }
+}
 
 /* ---------- team photographs ---------- */
-.photo { position: relative; display: block; overflow: clip; background: var(--ink-3); text-decoration: none; color: inherit; }
-.photo picture, .photo img { width: 100%; height: 100%; }
-.photo img { max-width: none; object-fit: cover; object-position: 50% 50%; }
-.photo--pos-mid img { object-position: 50% 50%; }
-.photo--pos-upper img { object-position: 50% 32%; }
-.photo--pos-faces img { object-position: 50% 40%; }
-.photo--pos-left img { object-position: 46% 50%; }
-.photogrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
-.photogrid .photo { aspect-ratio: 4 / 3; }
-.photogrid .photo--portrait { aspect-ratio: 3 / 4; }
-.photogrid .clip { margin: 0; }
-@media (max-width: 699px) { .photogrid { grid-template-columns: minmax(0, 1fr); } }
+.photo { position: relative; display: block; overflow: hidden; background: var(--ink-3); text-decoration: none; color: inherit; width: 100%; max-width: 100%; min-width: 0; min-height: 0; aspect-ratio: 4 / 3; }
+.photo picture { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.photo img { width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: 50% 58%; }
+/* Group shots have people in the lower-middle; bias the crop toward faces, not sky. */
+.photo--pos-mid img { object-position: 50% 58%; }
+.photo--pos-upper img { object-position: 50% 42%; }
+.photo--pos-faces img { object-position: 50% 62%; }
+.photo--pos-left img { object-position: 40% 58%; }
+.photogrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.25rem), 1fr)); gap: 1.25rem; max-width: 100%; }
+.photogrid > li { min-width: 0; min-height: 0; }
+.photogrid .photo, .photogrid .photo--portrait { aspect-ratio: 4 / 3; }
+.photogrid .clip { margin: 0; display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
+.photogrid .clip__video { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.photowall + .band__head { margin-top: clamp(2.5rem, 5vw, 4rem); position: relative; z-index: 1; }
 
 .clip { display: grid; gap: 0.5rem; align-content: start; }
 .clip__video { display: block; width: 100%; height: auto; aspect-ratio: 832 / 464; background: var(--ink); }

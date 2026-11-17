@@ -968,6 +968,46 @@ test.describe("gallery photographs", () => {
     }
   });
 
+  test("photograph tiles stay packed in the viewport and do not overlap the heading", async ({ page, isMobile }) => {
+    const sizes = isMobile
+      ? [{ width: 390, height: 844 }, { width: 360, height: 740 }]
+      : [{ width: 1024, height: 640 }, { width: 1280, height: 720 }, { width: 1366, height: 768 }, { width: 1536, height: 864 }, { width: 1920, height: 1080 }];
+    const noOverlap = (a, b) => a.y + a.height <= b.y + 1 || b.y + b.height <= a.y + 1 || a.x + a.width <= b.x + 1 || b.x + b.width <= a.x + 1;
+    for (const size of sizes) {
+      await page.setViewportSize(size);
+      for (const path of ["gallery.html", "index.html"]) {
+        await page.goto(path);
+        const vw = size.width;
+        const tiles = page.locator(".photowall a.photo, .photogrid a.photo, .photogrid .clip");
+        const count = await tiles.count();
+        expect(count, `${path} ${vw}`).toBeGreaterThan(0);
+        const boxes = [];
+        for (let i = 0; i < count; i++) {
+          const box = await tiles.nth(i).boundingBox();
+          expect(box, `${path} ${vw} tile ${i}`).toBeTruthy();
+          boxes.push(box);
+          expect(box.x, `${path} ${vw} tile ${i} left`).toBeGreaterThanOrEqual(-1);
+          expect(box.x + box.width, `${path} ${vw} tile ${i} right`).toBeLessThanOrEqual(vw + 1);
+          expect(box.width, `${path} ${vw} tile ${i} width`).toBeGreaterThan(80);
+          expect(box.height, `${path} ${vw} tile ${i} height`).toBeGreaterThan(80);
+          expect(box.height / box.width, `${path} ${vw} tile ${i} too tall`).toBeLessThan(2);
+        }
+        const heading = path === "gallery.html"
+          ? page.locator(".band__head").filter({ hasText: "More photographs" }).locator("h2")
+          : page.locator("#gallery-title");
+        const head = await heading.boundingBox();
+        expect(head, `${path} ${vw} heading`).toBeTruthy();
+        if (path === "gallery.html") {
+          const wall = await page.locator(".photowall").boundingBox();
+          expect(wall.y + wall.height, `${path} ${vw} wall vs heading`).toBeLessThanOrEqual(head.y + 1);
+        }
+        for (let i = 0; i < boxes.length; i++) {
+          expect(noOverlap(boxes[i], head), `${path} ${vw} tile ${i} overlaps heading`).toBe(true);
+        }
+      }
+    }
+  });
+
   test("lightbox opens a photograph, arrows move, Escape closes, and focus returns", async ({ page }) => {
     await page.goto("gallery.html");
     const first = page.locator(".photowall a.photo").first();
